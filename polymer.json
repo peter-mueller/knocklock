@@ -1,4 +1,10 @@
 {
+  "entrypoint": "index.html",
+  "builds": [
+    {
+      "preset": "es6-bundled"
+    }
+  ],
   "lint": {
     "rules": [
       "polymer-2"
