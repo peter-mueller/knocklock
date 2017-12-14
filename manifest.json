@@ -1,0 +1,6 @@
+{
+  "name": "knocklock",
+  "short_name": "knocklock",
+  "start_url": "/",
+  "display": "standalone"
+}
