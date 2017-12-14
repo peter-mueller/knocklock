@@ -1,0 +1,132 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="audio-detector">
+    <script>
+        class Statistics {
+            static mean(data) {
+                const sum = data.reduce((sum, val) => sum + val, 0);
+                return sum / data.length;
+            }
+            static std(data, mean) {
+                mean = mean || this.mean(data);
+                const sum = data
+                    .map(val => (val - mean) * (val - mean))
+                    .reduce((sum, val) => sum + val, 0);
+                return Math.sqrt(sum / (data.length - 1));
+            }
+        }
+
+        class SmoothedZScore {
+            constructor(lag, treshold, influence) {
+                this.lag = lag;
+                this.treshold = treshold;
+                this.influence = influence;
+
+                this.Y = [];
+            }
+            push(y) {
+                if (this.Y.length <= this.lag) {
+                    this.Y.push(y);
+                    return 0;
+                }
+
+                const mean = Statistics.mean(this.Y);
+                const std = Statistics.std(this.Y, mean);
+
+                if (Math.abs(y - mean) > this.treshold * std) {
+                    
+                    this.Y.push(this.influence * y + (1-this.influence)*this.Y[this.Y.length - 1]);
+                    this.Y.shift();
+                    if (y > mean) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+
+                } else {
+                    this.Y.push(y);
+                    this.Y.shift();
+                    return 0;
+                }
+            }
+        }
+
+
+        /**
+         * @customElement
+         * @polymer
+         */
+        class AudioDetector extends Polymer.Element {
+            static get is() { return 'audio-detector'; }
+            static get properties() {
+                return {
+                    lag: {
+                        type: Number,
+                        value: 100
+                    },
+                    treshold: {
+                        type: Number,
+                        value: 4
+                    },
+                    influence: {
+                        type: Number,
+                        value: 0.2
+                    },
+                    inhit: {
+                        type: Number,
+                        value: 0
+                    }
+                };
+            }
+
+            connectedCallback() {
+                const audioDetector = this;
+                super.connectedCallback();
+                navigator.getUserMedia(
+                    { audio: true },
+                    stream => {
+                        const ctx = new AudioContext();
+                        const input = ctx.createMediaStreamSource(stream);
+
+                        const beatDetector = ctx.createScriptProcessor(256, 1, 1);
+                        beatDetector.onaudioprocess = e => {
+                            var input = e.inputBuffer.getChannelData(0);
+                            audioDetector.push(input.reduce((sum, v) => sum +v),0);
+                        }
+
+                        input.connect(beatDetector);
+                        beatDetector.connect(ctx.destination);
+                    },
+                    e => { console.log("no media" + e); }
+                );
+            }
+
+            static get scorer() {
+                return this.scorer;
+            }
+
+            static get observers() {
+                return ['_onConfig(lag,treshold,influence)'];
+            }
+
+            push(value) {
+                const result = this.scorer.push(value);
+                if (result == 1 && this.inhit == 0) {
+                    this.inhit = 20;
+
+                    let e = new CustomEvent('hit', {bubbles: true, composed:true});
+                    this.dispatchEvent(e);
+                }
+                if (result != 1 && this.inhit > 0) {
+                    this.inhit -= 1;
+                } 
+            }
+            _onConfig(lag, treshold, influence) {
+                console.log(lag,treshold,influence);
+                this.scorer = new SmoothedZScore(lag, treshold, influence);
+            }
+        }
+
+        window.customElements.define(AudioDetector.is, AudioDetector);
+    </script>
+</dom-module>

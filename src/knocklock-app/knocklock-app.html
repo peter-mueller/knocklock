@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../audio-detector/audio-detector.html">
 
 <dom-module id="knocklock-app">
   <template>
@@ -7,7 +8,8 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <h2>Hello [[counter]]!</h2>
+    <audio-detector id="detector" on-hit="count"></audio-detector>
   </template>
 
   <script>
@@ -19,11 +21,15 @@
       static get is() { return 'knocklock-app'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'knocklock-app'
+          counter: {
+            type: Number,
+            value: 0
           }
         };
+      }
+
+      count(v) {
+        this.set('counter', this.counter +1 );
       }
     }
 
