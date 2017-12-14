@@ -66,7 +66,7 @@
                     },
                     treshold: {
                         type: Number,
-                        value: 4
+                        value: 1
                     },
                     influence: {
                         type: Number,
@@ -112,7 +112,7 @@
             push(value) {
                 const result = this.scorer.push(value);
                 if (result == 1 && this.inhit == 0) {
-                    this.inhit = 20;
+                    this.inhit = 10;
 
                     let e = new CustomEvent('hit', {bubbles: true, composed:true});
                     this.dispatchEvent(e);
