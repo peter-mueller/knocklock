@@ -1,5 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../audio-detector/audio-detector.html">
+<link rel="import" href="../knock-auth/knock-auth.html">
 
 <dom-module id="knocklock-app">
   <template>
@@ -9,7 +9,7 @@
       }
     </style>
     <h2>Hello [[counter]]!</h2>
-    <audio-detector id="detector" on-hit="count"></audio-detector>
+    <knock-auth></knock-auth>
   </template>
 
   <script>
@@ -28,9 +28,6 @@
         };
       }
 
-      count(v) {
-        this.set('counter', this.counter +1 );
-      }
     }
 
     window.customElements.define(KnocklockApp.is, KnocklockApp);

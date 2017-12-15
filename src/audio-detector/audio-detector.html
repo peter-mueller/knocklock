@@ -16,11 +16,14 @@
             }
         }
 
+        // od. PT1 digitale regler
         class SmoothedZScore {
             constructor(lag, treshold, influence) {
                 this.lag = lag;
                 this.treshold = treshold;
                 this.influence = influence;
+
+                this.gate = 0;
 
                 this.Y = [];
             }
@@ -33,11 +36,16 @@
                 const mean = Statistics.mean(this.Y);
                 const std = Statistics.std(this.Y, mean);
 
+                if (y <= this.gate * 1.5) {
+                    this.gate = 0;
+                }
+
                 if (Math.abs(y - mean) > this.treshold * std) {
-                    
-                    this.Y.push(this.influence * y + (1-this.influence)*this.Y[this.Y.length - 1]);
+
+                    this.Y.push(this.influence * y + (1 - this.influence) * this.Y[this.Y.length - 1]);
                     this.Y.shift();
-                    if (y > mean) {
+                    if (y > mean && this.gate == 0) {
+                        this.gate = mean;
                         return 1;
                     } else {
                         return -1;
@@ -75,23 +83,34 @@
                     inhit: {
                         type: Number,
                         value: 0
+                    },
+                    active: {
+                        type: Boolean,
+                        value: false,
+                        observer: 'onActive'
                     }
                 };
             }
 
-            connectedCallback() {
+            onActive(active) {
+                if (active == false) {
+                    if (this.ctx) {
+                        this.ctx.close();
+                    }
+                    return;
+                }
                 const audioDetector = this;
-                super.connectedCallback();
                 navigator.getUserMedia(
                     { audio: true },
                     stream => {
-                        const ctx = new AudioContext();
+                        this.ctx = new AudioContext();
+                        const ctx = this.ctx
                         const input = ctx.createMediaStreamSource(stream);
 
                         const beatDetector = ctx.createScriptProcessor(256, 1, 1);
                         beatDetector.onaudioprocess = e => {
                             var input = e.inputBuffer.getChannelData(0);
-                            audioDetector.push(input.reduce((sum, v) => sum +v),0);
+                            audioDetector.push(input.reduce((sum, v) => sum + v), 0);
                         }
 
                         input.connect(beatDetector);
@@ -111,18 +130,13 @@
 
             push(value) {
                 const result = this.scorer.push(value);
-                if (result == 1 && this.inhit == 0) {
-                    this.inhit = 5;
-
-                    let e = new CustomEvent('hit', {bubbles: true, composed:true});
+                if (result == 1) {
+                    let e = new CustomEvent('hit', { bubbles: true, composed: true });
                     this.dispatchEvent(e);
                 }
-                if (result != 1 && this.inhit > 0) {
-                    this.inhit -= 1;
-                } 
             }
             _onConfig(lag, treshold, influence) {
-                console.log(lag,treshold,influence);
+                console.log(lag, treshold, influence);
                 this.scorer = new SmoothedZScore(lag, treshold, influence);
             }
         }
