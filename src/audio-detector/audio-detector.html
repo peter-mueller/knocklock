@@ -23,8 +23,6 @@
                 this.treshold = treshold;
                 this.influence = influence;
 
-                this.gate = 0;
-
                 this.Y = [];
             }
             push(y) {
@@ -34,18 +32,18 @@
                 }
 
                 const mean = Statistics.mean(this.Y);
-                const std = Statistics.std(this.Y, mean);
+                let std = Statistics.std(this.Y, mean);
 
-                if (y <= this.gate * 1.5) {
-                    this.gate = 0;
+                console.log(std);
+                if (std < 0.001) {
+                    std = 0.001;
                 }
 
                 if (Math.abs(y - mean) > this.treshold * std) {
 
                     this.Y.push(this.influence * y + (1 - this.influence) * this.Y[this.Y.length - 1]);
                     this.Y.shift();
-                    if (y > mean && this.gate == 0) {
-                        this.gate = mean;
+                    if (y > mean) {
                         return 1;
                     } else {
                         return -1;
@@ -78,7 +76,7 @@
                     },
                     influence: {
                         type: Number,
-                        value: 0.1
+                        value: 0.3
                     },
                     inhit: {
                         type: Number,
@@ -106,6 +104,12 @@
                         this.ctx = new AudioContext();
                         const ctx = this.ctx
                         const input = ctx.createMediaStreamSource(stream);
+                        const biquadFilter = ctx.createBiquadFilter();
+                        biquadFilter.type = 'highpass';
+                        biquadFilter.frequency.value = 3000;
+                        biquadFilter.Q.value = 0.3;
+
+
 
                         const beatDetector = ctx.createScriptProcessor(256, 1, 1);
                         beatDetector.onaudioprocess = e => {
@@ -113,7 +117,8 @@
                             audioDetector.push(input.reduce((sum, v) => sum + v), 0);
                         }
 
-                        input.connect(beatDetector);
+                        input.connect(biquadFilter);
+                        biquadFilter.connect(beatDetector);
                         beatDetector.connect(ctx.destination);
                     },
                     e => { console.log("no media" + e); }
@@ -129,10 +134,17 @@
             }
 
             push(value) {
+                if (this.last && new Date() - this.last < 150) {
+                    return;
+                }
+                if (value < 0) {
+                    value = 0;
+                }
                 const result = this.scorer.push(value);
                 if (result == 1) {
                     let e = new CustomEvent('hit', { bubbles: true, composed: true });
                     this.dispatchEvent(e);
+                    this.last = new Date();
                 }
             }
             _onConfig(lag, treshold, influence) {
