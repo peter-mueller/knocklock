@@ -59,7 +59,7 @@
             CK
         </div>
 
-        <paper-toast id="toaster" text="Versuche mich zu knacken!"></paper-toast>
+        <paper-toast id="toaster" class="fit-bottom" text="Versuche mich zu knacken!"></paper-toast>
         <audio-detector id="detector" on-hit="onTap" treshold="3"></audio-detector>
     </template>
 
@@ -88,6 +88,7 @@
 
                 const knock = this.$.knock;
                 const toaster = this.$.toaster;
+                toaster.fitInto = knock;
 
                 knock.addEventListener('mousedown', this.onTap.bind(this));
 
@@ -140,6 +141,7 @@
             }
         }
 
+        let _instance;
         class TapRecorder {
 
             constructor(uid, refcode, toaster) {
@@ -188,7 +190,6 @@
                     data: this.taps
                 }).catch(function (error) {
                     console.log("daten nicht übernommen, da doppelte teilnahme.");
-                    // alert('Du hast an der Aktion schon teilgenommen. *SAD PANDA*')
                 });
             }
 
