@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/web-animations-js/web-animations.min.js">
-
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../audio-detector/audio-detector.html">
 
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -60,6 +60,7 @@
             CK
         </div>
 
+        <paper-toast id="toaster" class="fit-bottom" text="Versuche mich zu knacken!"></paper-toast>
 
         <audio-detector id="detector" on-hit="onTap" treshold="3"></audio-detector>
     </template>
@@ -88,6 +89,9 @@
                 super.connectedCallback();
 
                 const knock = this.$.knock;
+                const toaster = this.$.toaster;
+                toaster.fitInto = knock;
+
                 knock.addEventListener('mousedown', this.onTap.bind(this));
 
                 firebase.auth().onAuthStateChanged(function (user) {
@@ -96,9 +100,11 @@
                         let uid = user.uid;
                         console.log('User is logged in as ' + uid);
 
-                        let r = new TapRecorder(uid);
-                        knock.addEventListener('click', e => {
-                            r.recordTap();
+                        firebase.database().ref('refcode').once('value').then(function (refcode) {
+                            let r = new TapRecorder(uid, refcode.val(), toaster);
+                            knock.addEventListener('click', e => {
+                                r.recordTap();
+                            });
                         });
 
                     } else {
@@ -138,11 +144,14 @@
         }
 
         class TapRecorder {
-            constructor(uid) {
+
+            constructor(uid, refcode, toaster) {
                 this.taps = [];
                 this.timer = 0;
                 this.userID = uid;
                 this.counter = 0;
+                this.refCode = refcode;
+                this.toaster = toaster;
             }
 
             recordTap() {
@@ -154,7 +163,13 @@
                     if (r.taps.length > 0) {
                         console.log(r.taps);
 
-                        this.saveInFirebase();
+                        if (r.taps.length === this.refCode.length) {
+                            this.saveInFirebase();
+                            this.createUserFeedback();
+                        } else {
+                            this.toaster.text = 'Bitte den richtigen Code eingeben!';
+                            this.toaster.show();
+                        }
 
                         this.counter++;
                         r.taps = [];
@@ -175,7 +190,27 @@
                 firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
                     data: this.taps
                 });
+            }
 
+            createUserFeedback() {
+                let error = 0;
+
+                for (let i = 0; i < this.refCode.length; i++) {
+                    error += Math.pow(Math.abs(this.taps[i] - this.refCode[i]), 2);
+                }
+
+                console.log('Der Fehler war: ' + error);
+
+                if (error > 10000 * this.refCode.length) {
+                    this.toaster.text = 'Schade, leider nicht korrekt';
+                    this.toaster.show();
+                } else if (error > 2000 * this.refCode.length) {
+                    this.toaster.text = 'Das war schon nah dran. Probiere es weiter!';
+                    this.toaster.show();
+                } else {
+                    this.toaster.text = 'Well done. Der Code war richtig.';
+                    this.toaster.show();
+                }
             }
 
 
