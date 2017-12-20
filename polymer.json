@@ -1,12 +1,17 @@
 {
   "entrypoint": "index.html",
+  "shell": "src/knocklock-app/knocklock-app.html",
+  "sources": [
+    "src/**/*"
+  ],
   "builds": [
     {
       "preset": "es5-bundled"
     }
   ],
   "extraDependencies": [
-    "bower_components/webcomponents/*"
+    "manifest.json",
+    "bower_components/webcomponentsjs/*"
   ],
   "lint": {
     "rules": [
