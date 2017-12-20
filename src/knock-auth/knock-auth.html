@@ -39,7 +39,6 @@
                 -webkit-user-select: none;
 
                 cursor: pointer;
-
             }
 
             #knock.active {
@@ -60,8 +59,7 @@
             CK
         </div>
 
-        <paper-toast id="toaster" class="fit-bottom" text="Versuche mich zu knacken!"></paper-toast>
-
+        <paper-toast id="toaster" text="Versuche mich zu knacken!"></paper-toast>
         <audio-detector id="detector" on-hit="onTap" treshold="3"></audio-detector>
     </template>
 
@@ -90,7 +88,6 @@
 
                 const knock = this.$.knock;
                 const toaster = this.$.toaster;
-                toaster.fitInto = knock;
 
                 knock.addEventListener('mousedown', this.onTap.bind(this));
 
@@ -125,13 +122,13 @@
 
                 if (ball.animate != undefined) {
                     ball.animate([
-                        {transform: 'scale(1)'},
-                        {transform: 'scale(0.8)'},
-                        {transform: 'scale(1)'},
+                        { transform: 'scale(1)' },
+                        { transform: 'scale(0.8)' },
+                        { transform: 'scale(1)' },
                     ], {
-                        duration: 200,
-                        easing: 'cubic-bezier(0,.41,.88,.99)',
-                    });
+                            duration: 200,
+                            easing: 'cubic-bezier(0,.41,.88,.99)',
+                        });
                 }
                 if (!knock.classList.contains('active')) {
                     knock.classList.add('active');
@@ -190,7 +187,8 @@
                 firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
                     data: this.taps
                 }).catch(function (error) {
-                    alert('Du hast an der Aktion schon teilgenommen. *SAD PANDA*')
+                    console.log("daten nicht übernommen, da doppelte teilnahme.");
+                    // alert('Du hast an der Aktion schon teilgenommen. *SAD PANDA*')
                 });
             }
 
@@ -203,10 +201,10 @@
 
                 console.log('Der Fehler war: ' + error);
 
-                if (error > 10000 * this.refCode.length) {
+                if (error > 12000 * this.refCode.length) {
                     this.toaster.text = 'Schade, leider nicht korrekt';
                     this.toaster.show();
-                } else if (error > 2000 * this.refCode.length) {
+                } else if (error > 3000 * this.refCode.length) {
                     this.toaster.text = 'Das war schon nah dran. Probiere es weiter!';
                     this.toaster.show();
                 } else {
