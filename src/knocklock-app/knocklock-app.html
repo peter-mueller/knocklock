@@ -2,34 +2,72 @@
 <link rel="import" href="../knock-auth/knock-auth.html">
 
 <dom-module id="knocklock-app">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[counter]]!</h2>
-    <knock-auth></knock-auth>
-  </template>
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
 
-  <script>
-    /**
-     * @customElement
-     * @polymer
-     */
-    class KnocklockApp extends Polymer.Element {
-      static get is() { return 'knocklock-app'; }
-      static get properties() {
-        return {
-          counter: {
-            type: Number,
-            value: 0
-          }
-        };
-      }
+            #wrapper {
+                margin: auto;
+                max-width: 720px;
+            }
 
-    }
+            iframe {
+                box-sizing: border-box;
+                width: 100%;
+                border: 1rem solid #2f2f2f;
+                border-radius: 1rem;
+            }
+        </style>
+        <div id="wrapper">
+            <h2>Hallo Reisender,</h2>
+            <p>
+                bitte schaue dir das folgende Video an und versuche dich mit dieser Melodie per Klopfzeichen am <b>KnockLock</b>
+                zu
+                authentifizieren. Du erhälst direkt ein Feedback, wie gut du warst.<br><br>
+                <b>Aber Vorsicht:</b> Wenn du zu langsam bist, dann wird der Versuch beendet und du must von vorne
+                beginnen.
+            </p>
+            <br>
+            <iframe width="560" height="315"
+                    src="https://www.youtube.com/embed/9iTX_A1iWdM"
+                    frameborder="0"
+                    gesture="media"
+                    allow="encrypted-media"
+                    allowfullscreen></iframe>
+            <br>
+            <p>
+                Der <b>KnockLock</b> wird dir sagen, ob dein Versuch erfolgreich war, indem er grün wird.
+            </p>
+            <knock-auth></knock-auth>
+            <h2>
+                Danke für deine Unterstützung
+            </h2>
+        </div>
+    </template>
 
-    window.customElements.define(KnocklockApp.is, KnocklockApp);
-  </script>
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class KnocklockApp extends Polymer.Element {
+            static get is() {
+                return 'knocklock-app';
+            }
+
+            static get properties() {
+                return {
+                    counter: {
+                        type: Number,
+                        value: 0
+                    }
+                };
+            }
+
+        }
+
+        window.customElements.define(KnocklockApp.is, KnocklockApp);
+    </script>
 </dom-module>

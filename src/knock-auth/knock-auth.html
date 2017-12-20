@@ -3,6 +3,8 @@
 
 <link rel="import" href="../audio-detector/audio-detector.html">
 
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+
 <dom-module id="knock-auth">
     <template>
         <style>
@@ -54,9 +56,6 @@
 
             }
         </style>
-        <h2 id="title">knocklock</h2>
-        <p>Tap your knocking pattern to authenticate.</p>
-
         <div id="knock">KN
         <div id="ball"></div> CK</div>
 
@@ -86,6 +85,23 @@
 
                 const knock = this.$.knock;
                 knock.addEventListener('mousedown', this.onTap.bind(this));
+
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                        // User is signed in.
+                        let uid = user.uid;
+                        console.log('User is logged in as ' + uid);
+
+                        let r = new TapRecorder(uid);
+                        knock.addEventListener('click', e => {
+                            r.recordTap();
+                        });
+
+                    } else {
+                        console.log('User is logged out.')
+                    }
+                });
+
             }
 
             onTap() {
@@ -107,6 +123,62 @@
             }
         }
 
+        class TapRecorder {
+            constructor(uid) {
+                this.taps = [];
+                this.timer = 0;
+                this.userID = uid;
+                this.counter = 0;
+            }
+
+            recordTap() {
+                if (this.timer !== 0) {
+                    window.clearTimeout(this.timer);
+                }
+                const r = this;
+                this.timer = setTimeout(() => {
+                    if (r.taps.length > 0) {
+                        console.log(r.taps);
+
+                        this.saveInFirebase();
+
+                        this.counter++;
+                        r.taps = [];
+                    }
+                }, 700);
+
+                if (this.taps.length === 0) {
+                    this.start = new Date();
+                    this.taps.push(0);
+                    return;
+                }
+
+                const now = new Date();
+                this.taps.push(now - this.start);
+            }
+
+            saveInFirebase(){
+                firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
+                    data: this.taps
+                });
+
+            }
+
+
+        }
+
         window.customElements.define(KnockAuth.is, KnockAuth);
+
+        // Initialize Firebase
+        let config = {
+            apiKey: "AIzaSyCzXhSfqenZaGs1sz30vVv_gbq5HbEBsB4",
+            authDomain: "knocklock-99eb6.firebaseapp.com",
+            databaseURL: "https://knocklock-99eb6.firebaseio.com",
+            projectId: "knocklock-99eb6",
+            storageBucket: "knocklock-99eb6.appspot.com",
+            messagingSenderId: "710999866996"
+        };
+        firebase.initializeApp(config);
+
     </script>
 </dom-module>
