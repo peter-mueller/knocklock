@@ -6,7 +6,7 @@
     }
   ],
   "extraDependencies": [
-    "bower_components/webcomponentsjs/*"
+    "bower_components/webcomponents/*"
   ],
   "lint": {
     "rules": [
