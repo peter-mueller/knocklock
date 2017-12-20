@@ -2,11 +2,11 @@
   "entrypoint": "index.html",
   "builds": [
     {
-      "preset": "es5-bundled",
-      "bundle": {
-        "excludes": ["bower_components/webcomponentsjs/webcomponents-loader.js"]
-      }
+      "preset": "es5-bundled"
     }
+  ],
+  "extraDependencies": [
+    "bower_components/webcomponentsjs/*"
   ],
   "lint": {
     "rules": [
