@@ -189,6 +189,8 @@
             saveInFirebase() {
                 firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
                     data: this.taps
+                }).catch(function (error) {
+                    alert('Du hast an der Aktion schon teilgenommen. *SAD PANDA*')
                 });
             }
 
