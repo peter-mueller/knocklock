@@ -40,10 +40,9 @@
 
                 cursor: pointer;
 
-
             }
 
-            #knock.active  {
+            #knock.active {
                 background: #ff6e40;
             }
 
@@ -57,20 +56,25 @@
             }
         </style>
         <div id="knock">KN
-        <div id="ball"></div> CK</div>
+            <div id="ball"></div>
+            CK
+        </div>
 
 
         <audio-detector id="detector" on-hit="onTap" treshold="3"></audio-detector>
     </template>
 
-    
+
     <script>
         /**
          * @customElement
          * @polymer
          */
         class KnockAuth extends Polymer.Element {
-            static get is() { return 'knock-auth'; }
+            static get is() {
+                return 'knock-auth';
+            }
+
             static get properties() {
                 return {
                     counter: {
@@ -86,7 +90,7 @@
                 const knock = this.$.knock;
                 knock.addEventListener('mousedown', this.onTap.bind(this));
 
-                firebase.auth().onAuthStateChanged(function(user) {
+                firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                         // User is signed in.
                         let uid = user.uid;
@@ -102,7 +106,7 @@
                     }
                 });
 
-                firebase.auth().signInAnonymously().catch(function(error) {
+                firebase.auth().signInAnonymously().catch(function (error) {
                     console.log(error.code);
                     console.log(error.message);
                 });
@@ -112,19 +116,24 @@
             onTap() {
                 const ball = this.$.ball;
                 const knock = this.$.knock;
-                var player = ball.animate([
-                    { transform: 'scale(1)' },
-                    { transform: 'scale(0.8)' },
-                    { transform: 'scale(1)' },
-                ], {
+
+                if (ball.animate != undefined) {
+                    ball.animate([
+                        {transform: 'scale(1)'},
+                        {transform: 'scale(0.8)'},
+                        {transform: 'scale(1)'},
+                    ], {
                         duration: 200,
                         easing: 'cubic-bezier(0,.41,.88,.99)',
                     });
+                }
+                if (!knock.classList.contains('active')) {
+                    knock.classList.add('active');
+                    setTimeout(() => {
+                        knock.classList.remove('active')
+                    }, 200);
+                }
 
-                    if (!knock.classList.contains('active')) {
-                        knock.classList.add('active');
-                        setTimeout(() => {knock.classList.remove('active')}, 200);
-                    }
             }
         }
 
@@ -162,7 +171,7 @@
                 this.taps.push(now - this.start);
             }
 
-            saveInFirebase(){
+            saveInFirebase() {
                 firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
                     data: this.taps
                 });
