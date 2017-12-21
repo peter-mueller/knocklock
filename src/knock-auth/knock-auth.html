@@ -123,13 +123,13 @@
 
                 if (ball.animate != undefined) {
                     ball.animate([
-                        { transform: 'scale(1)' },
-                        { transform: 'scale(0.8)' },
-                        { transform: 'scale(1)' },
+                        {transform: 'scale(1)'},
+                        {transform: 'scale(0.8)'},
+                        {transform: 'scale(1)'},
                     ], {
-                            duration: 200,
-                            easing: 'cubic-bezier(0,.41,.88,.99)',
-                        });
+                        duration: 200,
+                        easing: 'cubic-bezier(0,.41,.88,.99)',
+                    });
                 }
                 if (!knock.classList.contains('active')) {
                     knock.classList.add('active');
@@ -141,7 +141,6 @@
             }
         }
 
-        let _instance;
         class TapRecorder {
 
             constructor(uid, refcode, toaster) {
@@ -188,8 +187,11 @@
             saveInFirebase() {
                 firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
                     data: this.taps
-                }).catch(function (error) {
-                    console.log("daten nicht übernommen, da doppelte teilnahme.");
+                }).catch(e => {
+                    firebase.database().ref('testsubjects/' + this.userID).once('value').then(value => {
+                        this.counter = Object.keys(value.val()).length + 1;
+                        this.saveInFirebase();
+                    });
                 });
             }
 
