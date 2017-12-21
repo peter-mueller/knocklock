@@ -61,11 +61,6 @@
             }
 
             #toaster.toastlock {
-                --paper-toast-background-color: #fede86;
-                --paper-toast-color: black;
-            }
-
-            #toaster.toasthardlock {
                 --paper-toast-background-color: #ec696d;
                 --paper-toast-color: white;
             }
@@ -234,11 +229,11 @@
                     this.toaster.show();
                 } else if (error > 3000 * this.refCode.length) {
                     this.toaster.text = 'Das war schon nah dran. Probiere es weiter!';
-                    this.setToastColor(2);
+                    this.setToastColor(1);
                     this.toaster.show();
                 } else {
                     this.toaster.text = 'Gut gemacht! Der Code war richtig.';
-                    this.setToastColor(3);
+                    this.setToastColor(2);
                     this.toaster.show();
                 }
             }
@@ -247,20 +242,13 @@
             setToastColor(lockState) {
                 if (lockState === 1) {
                     this.toaster.classList.remove('toastopen');
-                    this.toaster.classList.remove('toastlock');
-                    this.toaster.classList.add('toasthardlock');
-                } else if (lockState === 2) {
-                    this.toaster.classList.remove('toastopen');
                     this.toaster.classList.add('toastlock');
-                    this.toaster.classList.remove('toasthardlock');
-                } else if (lockState === 3) {
+                } else if (lockState === 2) {
                     this.toaster.classList.add('toastopen');
                     this.toaster.classList.remove('toastlock');
-                    this.toaster.classList.remove('toasthardlock');
                 } else {
                     this.toaster.classList.remove('toastopen');
                     this.toaster.classList.remove('toastlock');
-                    this.toaster.classList.remove('toasthardlock');
                 }
             }
 
