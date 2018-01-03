@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/web-animations-js/web-animations.min.js">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../audio-detector/audio-detector.html">
 
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
@@ -24,15 +25,16 @@
             }
 
             #knock {
-                background-color: #ff8a50;
+                background-color: #439aca;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
                 color: white;
-                border: none;
-                width: 100%;
                 height: 200px;
+                font-size: 48px;
+
+                margin: 1rem;
 
                 user-select: none;
                 -moz-user-select: none;
@@ -42,24 +44,40 @@
             }
 
             #knock.active {
-                background: #ff6e40;
+                background: #53aada;
             }
 
             #ball {
                 border: 1px solid white;
                 border-radius: 50%;
-                background-color: #ff8a50;
-                width: 16px;
-                height: 16px;
+                background-color: #439aca;
+                width: 64px;
+                height: 64px;
 
             }
+
+            #toaster {
+                border-radius: 0 0 3px 3px;
+            }
+
+            #toaster.toastlock {
+                --paper-toast-background-color: #ec696d;
+                --paper-toast-color: white;
+            }
+
+            #toaster.toastopen {
+                --paper-toast-background-color: #36c2a6;
+                --paper-toast-color: white;
+            }
+
         </style>
-        <div id="knock">KN
+        <paper-button id="knock" raised>
+            KN
             <div id="ball"></div>
             CK
-        </div>
+        </paper-button>
 
-        <paper-toast id="toaster" text="Versuche mich zu knacken!"></paper-toast>
+        <paper-toast id="toaster" class="fit-bottom" text="Versuche mich zu knacken!"></paper-toast>
         <audio-detector id="detector" on-hit="onTap" treshold="3"></audio-detector>
     </template>
 
@@ -88,6 +106,7 @@
 
                 const knock = this.$.knock;
                 const toaster = this.$.toaster;
+                toaster.fitInto = knock;
 
                 knock.addEventListener('mousedown', this.onTap.bind(this));
 
@@ -122,13 +141,13 @@
 
                 if (ball.animate != undefined) {
                     ball.animate([
-                        { transform: 'scale(1)' },
-                        { transform: 'scale(0.8)' },
-                        { transform: 'scale(1)' },
+                        {transform: 'scale(1)'},
+                        {transform: 'scale(0.5)'},
+                        {transform: 'scale(1)'},
                     ], {
-                            duration: 200,
-                            easing: 'cubic-bezier(0,.41,.88,.99)',
-                        });
+                        duration: 200,
+                        easing: 'cubic-bezier(0,.41,.88,.99)',
+                    });
                 }
                 if (!knock.classList.contains('active')) {
                     knock.classList.add('active');
@@ -165,6 +184,7 @@
                             this.createUserFeedback();
                         } else {
                             this.toaster.text = 'Bitte den richtigen Code eingeben!';
+                            this.setToastColor();
                             this.toaster.show();
                         }
 
@@ -186,9 +206,11 @@
             saveInFirebase() {
                 firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
                     data: this.taps
-                }).catch(function (error) {
-                    console.log("daten nicht übernommen, da doppelte teilnahme.");
-                    // alert('Du hast an der Aktion schon teilgenommen. *SAD PANDA*')
+                }).catch(e => {
+                    firebase.database().ref('testsubjects/' + this.userID).once('value').then(value => {
+                        this.counter = Object.keys(value.val()).length + 1;
+                        this.saveInFirebase();
+                    });
                 });
             }
 
@@ -203,16 +225,32 @@
 
                 if (error > 12000 * this.refCode.length) {
                     this.toaster.text = 'Schade, leider nicht korrekt';
+                    this.setToastColor(1);
                     this.toaster.show();
                 } else if (error > 3000 * this.refCode.length) {
                     this.toaster.text = 'Das war schon nah dran. Probiere es weiter!';
+                    this.setToastColor(1);
                     this.toaster.show();
                 } else {
                     this.toaster.text = 'Gut gemacht! Der Code war richtig.';
+                    this.setToastColor(2);
                     this.toaster.show();
                 }
             }
 
+
+            setToastColor(lockState) {
+                if (lockState === 1) {
+                    this.toaster.classList.remove('toastopen');
+                    this.toaster.classList.add('toastlock');
+                } else if (lockState === 2) {
+                    this.toaster.classList.add('toastopen');
+                    this.toaster.classList.remove('toastlock');
+                } else {
+                    this.toaster.classList.remove('toastopen');
+                    this.toaster.classList.remove('toastlock');
+                }
+            }
 
         }
 
