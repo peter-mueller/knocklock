@@ -87,9 +87,6 @@ deviation = apply(dcorr - reference,1, sd)
 deviation
 plot(reference,deviation)
 
-model = lm(deviation ~ reference - 1  )
-summary(model)
-
 bounds = cbind(+deviation, -deviation)
 bounds
 boxplot(t(bounds) , xlab="Values", ylab="Bounds")
