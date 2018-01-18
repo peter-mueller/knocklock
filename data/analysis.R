@@ -3,24 +3,18 @@ getwd()
 d = read.csv("last-try-per-person.csv", header=FALSE)
 
 reference =  c(0,500,833,1000,1500,2500,3000)
-d$reference = rep(reference, nrow(d))
 
-
-
+# Abweichung zu Referenz Plot 1
 r = data.frame(
 	id = 1:nrow(d),
 	reference = rep(reference,each= nrow(d)),
 	input = unlist(d)
 );
-d = t(d)
-r
 plot(input ~ reference  ,r )
 
-
+# Abweichung zu Referenz Plot 2
 r$error =r$input - r$reference
-
-r[r$reference == 1000 & r$error > 500, ]
-
+d = t(d)
 matplot(reference,d, type="b",
 	xlab="Zeitpunkt im Referenzmuster",
 	ylab="Zeitpunkt Nutzereingabe"
@@ -29,7 +23,7 @@ lines(reference,reference,
 	lwd=3, lty="dashed"
 )
 
-
+# Plot und Test auf Normalverteilung
 par(mfrow=c(2,4))
 for (i in 1:7) {
 hist(d[i,] - reference[i],breaks=seq(-2000,2000,by=100),
@@ -39,53 +33,64 @@ hist(d[i,] - reference[i],breaks=seq(-2000,2000,by=100),
 	ylim=c(0,50),
 )
 }
-par(mfrow=c(1,1))
 
+#Keine Normalverteilung
+par(mfrow=c(2,3))
+dataset = t(d);
+for (col in 2:7) {
+qqnorm(dataset[,col])
+qqline(dataset[,col])
+}
 
-d[,d[4,] > 1500]
+# Verlauf und Abweichung über die Zeit
 dcorr = d[,d[4,] <= 1500]
 summary(t(dcorr))
 
-
-par(mfrow=c(3,1))
-dcorr = d[,d[7,] <= 2800 & d[7,] <= 2800]
-
-matplot(reference, dcorr - reference, pch=1,lty=1 ,type="b",
+par(mfrow=c(1,1))
+matplot(reference, dcorr - reference,lty=1 ,type="b",
 	main="Fehler zum Referenzwert"
 )
 
+#Varianz und Standardabweichung
 1/apply(abs(dcorr-reference), 1, sd)
 apply(abs(dcorr-reference), 1, var)
 
-
-# Korrektur auf letzten wert
+# Skalierung auf letzten Wert
 for (row in 1:ncol(dcorr)) {
-	dcorr[, row] = dcorr[,row] / (dcorr[7,row]/3000)
+  linecorr = dcorr[,row] / (dcorr[7,row]/3000)
+  if(all(linecorr <= reference*1.3 & linecorr >= reference*0.7))
+	  dcorr[, row] = linecorr
+  else
+    dcorr[, row] = NA
 }
+dcorr = t(na.omit(t(dcorr)))
+
 dcorr
 matplot(reference, dcorr - reference, pch=1, col=1,lty=1 ,type="b",
 	main="Skalierung auf den Referenzwert am Ende"
 )
-apply(dcorr, 2,  sd)
+#Varianz und Standardabweichung nach Skalierung
+1/apply(abs(dcorr-reference), 1, sd)
+apply(abs(dcorr-reference), 1, var)
 
-deviation = apply(dcorr- reference,1, sd)
+#Nach Skalierung sollte es eine Normalverteilung sein
+par(mfrow=c(2,3))
+dataset = t(dcorr);
+for (col in 2:6) {
+  qqnorm(dataset[,col])
+  qqline(dataset[,col])
+}
+
+###### Default Grenzen für KnockLock ableiten 
+par(mfrow=c(1,1))
+deviation = apply(dcorr - reference,1, sd)
 deviation
 plot(reference,deviation)
 
-as.vector(dcorr-reference)
+model = lm(deviation ~ reference - 1  )
+summary(model)
 
-bounds = 2*apply(deviation, 1,sd)
+bounds = cbind(+deviation, -deviation)
 bounds
-model = lm(bounds ~ 0+reference )
-model
+boxplot(t(bounds) , xlab="Values", ylab="Bounds")
 
-lines(reference,bounds)
-lines(reference,reference * 0.22)
-
-lines(reference,-bounds)
-lines(reference,-reference * 0.22)
-
-
-matplot(reference, deviation, )
-
-model
