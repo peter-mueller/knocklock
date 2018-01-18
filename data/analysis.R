@@ -91,3 +91,4 @@ bounds = cbind(+deviation, -deviation)
 bounds
 boxplot(t(bounds) , xlab="Values", ylab="Bounds")
 
+mean(deviation[2:6])
