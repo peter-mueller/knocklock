@@ -15,7 +15,7 @@ plot(input ~ reference  ,r )
 # Abweichung zu Referenz Plot 2
 r$error =r$input - r$reference
 d = t(d)
-matplot(reference,d, type="b",
+matplot(reference,d, type="l",
 	xlab="Zeitpunkt im Referenzmuster",
 	ylab="Zeitpunkt Nutzereingabe"
 )
@@ -24,8 +24,8 @@ lines(reference,reference,
 )
 
 # Plot und Test auf Normalverteilung
-par(mfrow=c(2,4))
-for (i in 1:7) {
+par(mfrow=c(2,3))
+for (i in 2:7) {
 hist(d[i,] - reference[i],breaks=seq(-2000,2000,by=100),
 	main=i,
 	xlab=paste("Fehler zum Referenzwert ",i),
@@ -38,12 +38,11 @@ hist(d[i,] - reference[i],breaks=seq(-2000,2000,by=100),
 par(mfrow=c(2,3))
 dataset = t(d);
 for (col in 2:7) {
-qqnorm(dataset[,col])
+qqnorm(dataset[,col], main = bquote("Timeslot " ~ .(col)))
 qqline(dataset[,col])
 }
 
 # Verlauf und Abweichung über die Zeit
-dcorr = d[,d[4,] <= 1500]
 summary(t(dcorr))
 
 par(mfrow=c(1,1))
@@ -65,7 +64,6 @@ for (row in 1:ncol(dcorr)) {
 }
 dcorr = t(na.omit(t(dcorr)))
 
-dcorr
 matplot(reference, dcorr - reference, pch=1, col=1,lty=1 ,type="b",
 	main="Skalierung auf den Referenzwert am Ende"
 )
@@ -77,7 +75,7 @@ apply(abs(dcorr-reference), 1, var)
 par(mfrow=c(2,3))
 dataset = t(dcorr);
 for (col in 2:6) {
-  qqnorm(dataset[,col])
+  qqnorm(dataset[,col], main = bquote("Timeslot " ~ .(col)))
   qqline(dataset[,col])
 }
 
