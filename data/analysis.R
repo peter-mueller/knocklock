@@ -1,6 +1,6 @@
 getwd()
 
-d = read.csv("last-try-per-person.csv", header=FALSE)
+d = read.csv("all-data.csv", header=FALSE)
 
 reference =  c(0,500,833,1000,1500,2500,3000)
 
@@ -29,8 +29,7 @@ for (i in 2:7) {
 hist(d[i,] - reference[i],breaks=seq(-2000,2000,by=100),
 	main=i,
 	xlab=paste("Fehler zum Referenzwert ",i),
-	xlim=c(-2000,2000),
-	ylim=c(0,50),
+	xlim=c(-2000,2000)
 )
 }
 
@@ -43,10 +42,11 @@ qqline(dataset[,col])
 }
 
 # Verlauf und Abweichung über die Zeit
+dcorr = d
 summary(t(dcorr))
 
 par(mfrow=c(1,1))
-matplot(reference, dcorr - reference,lty=1 ,type="b",
+matplot(reference, dcorr - reference,lty=1 ,type="l",
 	main="Fehler zum Referenzwert"
 )
 
