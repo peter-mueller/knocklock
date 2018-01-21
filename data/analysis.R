@@ -10,7 +10,9 @@ r = data.frame(
 	reference = rep(reference,each= nrow(d)),
 	input = unlist(d)
 );
-plot(input ~ reference  ,r )
+plot(input ~ reference  ,r, 
+     ylab="Eingabe",
+     xlab="Zeit" )
 
 # Abweichung zu Referenz Plot 2
 r$error =r$input - r$reference
@@ -47,7 +49,9 @@ summary(t(dcorr))
 
 par(mfrow=c(1,1))
 matplot(reference, dcorr - reference,lty=1 ,type="l",
-	main="Fehler zum Referenzwert"
+	main="Fehler zum Referenzwert",
+	ylab="Fehler",
+	xlab="Zeit" 
 )
 
 #Varianz und Standardabweichung
@@ -65,7 +69,9 @@ for (row in 1:ncol(dcorr)) {
 dcorr = t(na.omit(t(dcorr)))
 
 matplot(reference, dcorr - reference, pch=1, col=1,lty=1 ,type="b",
-	main="Skalierung auf den Referenzwert am Ende"
+	main="Skalierung auf den Referenzwert am Ende",
+	ylab="Fehler",
+	xlab="Zeit"
 )
 #Varianz und Standardabweichung nach Skalierung
 1/apply(abs(dcorr-reference), 1, sd)
@@ -83,7 +89,7 @@ for (col in 2:6) {
 par(mfrow=c(1,1))
 deviation = apply(dcorr - reference,1, sd)
 deviation
-plot(reference,deviation)
+#plot(reference,deviation)
 
 bounds = cbind(+deviation, -deviation)
 bounds
