@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../knock-auth/knock-auth.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
 
 <dom-module id="knocklock-app">
     <template>
@@ -37,6 +39,21 @@
                 -webkit-clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
             }
         </style>
+
+        <firebase-app
+                auth-domain="knocklock-99eb6.firebaseapp.com"
+                database-url="https://knocklock-99eb6.firebaseio.com"
+                api-key="AIzaSyCzXhSfqenZaGs1sz30vVv_gbq5HbEBsB4"
+                project-id="knocklock-99eb6"
+                storage-bucket="knocklock-99eb6.appspot.com"
+                messaging-sender-id="710999866996">
+        </firebase-app>
+
+        <firebase-auth id="auth"
+                       user="{{user}}"
+                       on-error="_errorHandler">
+        </firebase-auth>
+
         <div id="wrapper">
             <h2>Willkommen</h2>
             <p>
@@ -70,7 +87,9 @@
                 Der
                 <b>KnockLock</b> wird dir sagen, ob dein Versuch erfolgreich war.
             </p>
-            <knock-auth></knock-auth>
+            <template is="dom-if" if="{{user}}">
+                <knock-auth user={{user}}></knock-auth>
+            </template>
             <h4>
                 Danke für deine Unterstützung
             </h4>
@@ -92,9 +111,9 @@
 
             static get properties() {
                 return {
-                    counter: {
-                        type: Number,
-                        value: 0
+                    user: {
+                        type: Object,
+                        notify: true
                     }
                 };
             }

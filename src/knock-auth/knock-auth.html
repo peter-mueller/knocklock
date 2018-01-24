@@ -25,7 +25,6 @@
             }
 
             #knock {
-                background-color: #439aca;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -43,14 +42,21 @@
                 cursor: pointer;
             }
 
-            #knock.active {
-                background: #53aada;
+            #knock.unlocked {
+                background-color: #439aca;
+            }
+
+            #knock.ready-to-lock {
+                background-color: #fede86;
+            }
+
+            #knock.locked {
+                background-color: #ec696d;
             }
 
             #ball {
                 border: 1px solid white;
                 border-radius: 50%;
-                background-color: #439aca;
                 width: 64px;
                 height: 64px;
 
@@ -60,18 +66,8 @@
                 border-radius: 0 0 3px 3px;
             }
 
-            #toaster.toastlock {
-                --paper-toast-background-color: #ec696d;
-                --paper-toast-color: white;
-            }
-
-            #toaster.toastopen {
-                --paper-toast-background-color: #36c2a6;
-                --paper-toast-color: white;
-            }
-
         </style>
-        <paper-button id="knock" raised>
+        <paper-button class="unlocked" id="knock" raised>
             KN
             <div id="ball"></div>
             CK
@@ -94,9 +90,8 @@
 
             static get properties() {
                 return {
-                    counter: {
-                        type: Number,
-                        value: 0
+                    user: {
+                        type: Object
                     }
                 };
             }
@@ -110,29 +105,10 @@
 
                 knock.addEventListener('mousedown', this.onTap.bind(this));
 
-                firebase.auth().onAuthStateChanged(function (user) {
-                    if (user) {
-                        // User is signed in.
-                        let uid = user.uid;
-                        console.log('User is logged in as ' + uid);
-
-                        firebase.database().ref('refcode').once('value').then(function (refcode) {
-                            let r = new TapRecorder(uid, refcode.val(), toaster);
-                            knock.addEventListener('click', e => {
-                                r.recordTap();
-                            });
-                        });
-
-                    } else {
-                        console.log('User is logged out.')
-                    }
+                let r = new KnockLock(this.user.uid, toaster, knock);
+                knock.addEventListener('click', e => {
+                    r.recordTap();
                 });
-
-                firebase.auth().signInAnonymously().catch(function (error) {
-                    console.log(error.code);
-                    console.log(error.message);
-                });
-
             }
 
             onTap() {
@@ -159,15 +135,15 @@
             }
         }
 
-        class TapRecorder {
+        class KnockLock {
 
-            constructor(uid, refcode, toaster) {
+            constructor(uid, toaster, lockButton) {
                 this.taps = [];
                 this.timer = 0;
                 this.userID = uid;
-                this.counter = 0;
-                this.refCode = refcode;
                 this.toaster = toaster;
+                this.lockButton = lockButton;
+                this.patternRef = undefined;
             }
 
             recordTap() {
@@ -179,16 +155,14 @@
                     if (r.taps.length > 0) {
                         console.log(r.taps);
 
-                        if (r.taps.length === this.refCode.length) {
-                            this.saveInFirebase();
-                            this.createUserFeedback();
-                        } else {
-                            this.toaster.text = 'Bitte den richtigen Code eingeben!';
-                            this.setToastColor();
-                            this.toaster.show();
-                        }
+                        if (r.taps.length > 2) {
+                            this.authInFirebase();
 
-                        this.counter++;
+                        } else if (!KnockAuth.properties._locked) {
+                            this.toaster.text = 'Der Code muss mind. 3 Taps enthalten.';
+                            this.toaster.show();
+
+                        }
                         r.taps = [];
                     }
                 }, 1500);
@@ -203,69 +177,56 @@
                 this.taps.push(now - this.start);
             }
 
-            saveInFirebase() {
-                firebase.database().ref('testsubjects/' + this.userID + '/' + this.counter).set({
-                    data: this.taps
-                }).catch(e => {
-                    firebase.database().ref('testsubjects/' + this.userID).once('value').then(value => {
-                        this.counter = Object.keys(value.val()).length + 1;
-                        this.saveInFirebase();
+            authInFirebase() {
+                if (this.patternRef === undefined) {
+                    this.patternRef = firebase.database().ref('testsubjects/' + this.userID + '/')
+                        .push({
+                            refcode: this.taps
+                        });
+
+                    this.setLockColor(1);
+
+                    this.patternRef.child('locked')
+                        .on('value', locked => {
+                            console.log(locked.val());
+
+                            if (locked.val() === true) {
+                                this.setLockColor(2);
+                            } else if (locked.val() === false) {
+                                this.toaster.text = 'Erfolgreich authentifiziert!';
+                                this.toaster.show();
+                                this.setLockColor();
+                                this.patternRef = undefined;
+                            }
+                        });
+                } else {
+
+                    this.patternRef.push({
+                        data: this.taps
                     });
-                });
-            }
 
-            createUserFeedback() {
-                let error = 0;
-
-                for (let i = 0; i < this.refCode.length; i++) {
-                    error += Math.pow(Math.abs(this.taps[i] - this.refCode[i]), 2);
-                }
-
-                console.log('Der Fehler war: ' + error);
-
-                if (error > 12000 * this.refCode.length) {
-                    this.toaster.text = 'Schade, leider nicht korrekt';
-                    this.setToastColor(1);
-                    this.toaster.show();
-                } else if (error > 3000 * this.refCode.length) {
-                    this.toaster.text = 'Das war schon nah dran. Probiere es weiter!';
-                    this.setToastColor(1);
-                    this.toaster.show();
-                } else {
-                    this.toaster.text = 'Gut gemacht! Der Code war richtig.';
-                    this.setToastColor(2);
-                    this.toaster.show();
                 }
             }
 
-
-            setToastColor(lockState) {
+            setLockColor(lockState) {
                 if (lockState === 1) {
-                    this.toaster.classList.remove('toastopen');
-                    this.toaster.classList.add('toastlock');
+                    this.lockButton.classList.remove('locked');
+                    this.lockButton.classList.remove('unlocked');
+                    this.lockButton.classList.add('ready-to-lock');
                 } else if (lockState === 2) {
-                    this.toaster.classList.add('toastopen');
-                    this.toaster.classList.remove('toastlock');
+                    this.lockButton.classList.add('locked');
+                    this.lockButton.classList.remove('unlocked');
+                    this.lockButton.classList.remove('ready-to-lock');
                 } else {
-                    this.toaster.classList.remove('toastopen');
-                    this.toaster.classList.remove('toastlock');
+                    this.lockButton.classList.remove('locked');
+                    this.lockButton.classList.add('unlocked');
+                    this.lockButton.classList.remove('ready-to-lock');
                 }
             }
 
         }
 
         window.customElements.define(KnockAuth.is, KnockAuth);
-
-        // Initialize Firebase
-        let config = {
-            apiKey: "AIzaSyCzXhSfqenZaGs1sz30vVv_gbq5HbEBsB4",
-            authDomain: "knocklock-99eb6.firebaseapp.com",
-            databaseURL: "https://knocklock-99eb6.firebaseio.com",
-            projectId: "knocklock-99eb6",
-            storageBucket: "knocklock-99eb6.appspot.com",
-            messagingSenderId: "710999866996"
-        };
-        firebase.initializeApp(config);
 
     </script>
 </dom-module>
