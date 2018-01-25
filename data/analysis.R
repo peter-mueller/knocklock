@@ -1,14 +1,14 @@
 getwd()
 
-d = read.csv("all-data.csv", header=FALSE)
+orginalData = read.csv("all-data.csv", header=FALSE)
 
 reference =  c(0,500,833,1000,1500,2500,3000)
 
 # Abweichung zu Referenz Plot 1
 r = data.frame(
-	id = 1:nrow(d),
-	reference = rep(reference,each= nrow(d)),
-	input = unlist(d)
+	id = 1:nrow(orginalData),
+	reference = rep(reference,each= nrow(orginalData)),
+	input = unlist(orginalData)
 );
 plot(input ~ reference  ,r, 
      ylab="Eingabe",
@@ -16,7 +16,7 @@ plot(input ~ reference  ,r,
 
 # Abweichung zu Referenz Plot 2
 r$error =r$input - r$reference
-d = t(d)
+d = t(orginalData)
 matplot(reference,d, type="l",
 	xlab="Zeitpunkt im Referenzmuster",
 	ylab="Zeitpunkt Nutzereingabe"
@@ -95,4 +95,12 @@ bounds = cbind(+deviation, -deviation)
 bounds
 boxplot(t(bounds) , xlab="Values", ylab="Bounds")
 
-mean(deviation[2:6])
+sprintf("Maximale Abweichung bei normalisierten Werten (95%% Quantil): %f",2 * mean(deviation[2:6]))
+
+nonScaledDev = apply((t(orginalData) - reference) * 2, 1, sd)
+model <- lm(nonScaledDev ~ reference - 1)
+plot(reference, nonScaledDev)
+abline(model, col="red")
+sprintf("Model zum Std-Fehler/Zeit für Skalierung: |meas_last - ref_last| <= ref_last * %f",model$coefficients[1])
+
+        
