@@ -10,6 +10,9 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
     "web-animations-js": "web-animations/web-animations-js#^2.3.1",
     "paper-toast": "PolymerElements/paper-toast#^2.0.0",
-    "paper-button": "PolymerElements/paper-button#^2.0.0"
+    "paper-button": "PolymerElements/paper-button#^2.0.0",
+    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
+    "polymerfire": "firebase/polymerfire#^2.2.1",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.1"
   }
 }
