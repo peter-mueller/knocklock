@@ -165,11 +165,13 @@
 
             constructor(uid, toaster, lockButton) {
                 this.taps = [];
+                this.refcode = [];
                 this.timer = 0;
                 this.userID = uid;
                 this.toaster = toaster;
                 this.lockButton = lockButton;
                 this.patternRef = undefined;
+                this.locked = false;
             }
 
             recordTap() {
@@ -182,9 +184,9 @@
                         console.log(r.taps);
 
                         if (r.taps.length > 2) {
-                            this.authInFirebase();
+                            this.processTaps();
 
-                        } else if (!KnockAuth.properties._locked) {
+                        } else {
                             this.toaster.text = 'Der Code muss mind. 3 Taps enthalten.';
                             this.toaster.show();
 
@@ -203,44 +205,82 @@
                 this.taps.push(now - this.start);
             }
 
-            authInFirebase() {
+            processTaps() {
                 if (this.patternRef === undefined) {
                     this.patternRef = firebase.database().ref('testsubjects/' + this.userID + '/')
                         .push({
                             refcode: this.taps
                         });
-
+                    this.refcode = this.taps;
                     this.setLockColor(1);
                     this.toaster.text = 'Zum Speichern wiederholen';
                     this.toaster.show();
 
-                    this.patternRef.child('locked')
-                        .on('value', locked => {
-                            console.log(locked.val());
-
-                            if (locked.val() === true) {
-                                this.setLockColor(2);
-                                this.toaster.text = 'KnockLock geschlossen! Zum Öffnen Muster eingeben.';
-                                this.toaster.show();
-                            } else if (locked.val() === false) {
-                                this.toaster.text = 'KnockLock geöffnet! Zum Schließen Muster eingeben.';
-                                this.toaster.show();
-                                this.setLockColor(1);
-                                this.patternRef = undefined;
-                            }
-                        });
                 } else {
 
                     this.patternRef.push({
                         data: this.taps
                     });
 
+                    this.checkTaps();
+
                 }
+            }
+
+            checkTaps() {
+                let tryData = this.taps;
+                let refcode = this.refcode;
+
+                // Parameter for Authentication
+                const maxScaleErr = 0.31;
+                const maxErr = 185;
+
+                //Fehlschlag bei ungleicher Länge
+                if (refcode.length !== tryData.length) {
+                    this.showAuthErr();
+                    return;
+                }
+
+                let lastIndex = refcode.length - 1;
+                let lastErr = tryData[lastIndex] - refcode[lastIndex];
+
+                //Fehlschlag falls Zeitfehler für Skalierung zu hoch
+                if (Math.abs(lastErr) > refcode[lastIndex] * maxScaleErr) {
+                    this.showAuthErr();
+                    return;
+                }
+
+                //Skalierung aller Werte und Fehlschlag bei zu großem Fehler
+                let scale = refcode[lastIndex] / tryData[lastIndex];
+                if (tryData.some((timestamp, index) => Math.abs((timestamp * scale) - refcode[index]) > maxErr)) {
+                    this.showAuthErr();
+                    return;
+                }
+
+                //Passed Validation
+                this.locked = !this.locked;
+
+                if (this.locked === true) {
+                    this.setLockColor(2);
+                    this.toaster.text = 'KnockLock geschlossen! Zum Öffnen Muster eingeben.';
+                    this.toaster.show();
+                } else if (this.locked === false) {
+                    this.toaster.text = 'KnockLock geöffnet! Zum Schließen Muster eingeben.';
+                    this.toaster.show();
+                    this.setLockColor(1);
+                }
+            }
+
+            showAuthErr() {
+                this.toaster.text = 'Eingabe fehlerhaft.';
+                this.toaster.show();
             }
 
             resetlock() {
                 console.log("Knocklock reset");
                 this.patternRef = undefined;
+                this.refcode = undefined;
+                this.locked = false;
                 this.setLockColor();
                 this.toaster.text = 'Erfolgreich zurückgesetzt';
                 this.toaster.show();
