@@ -211,6 +211,8 @@
                         });
 
                     this.setLockColor(1);
+                    this.toaster.text = 'Zum Speichern wiederholen';
+                    this.toaster.show();
 
                     this.patternRef.child('locked')
                         .on('value', locked => {
@@ -218,6 +220,8 @@
 
                             if (locked.val() === true) {
                                 this.setLockColor(2);
+                                this.toaster.text = 'KnockLock wurde geschlossen';
+                                this.toaster.show();
                             } else if (locked.val() === false) {
                                 this.toaster.text = 'Erfolgreich authentifiziert!';
                                 this.toaster.show();
