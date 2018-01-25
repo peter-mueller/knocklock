@@ -1,7 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../knock-auth/knock-auth.html">
+<link rel="import" href="../knock-questions/knock-questions.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
@@ -50,6 +52,7 @@
                        user="{{user}}"
                        on-error="_errorHandler">
         </firebase-auth>
+        <firebase-query path="questions" data="{{questions}}"></firebase-query>
 
         <div id="wrapper">
             <h2>Willkommen</h2>
@@ -88,6 +91,17 @@
                 </div>
             </template>
 
+            <br>
+            <p>
+                <b>Nimm dir bitte noch etwas Zeit, um die folgenden Fragen zu beantworten.</b><br>
+                <small>Die Eingabe wird automatisch gespeichert</small>
+
+                <template is="dom-if" if="{{user}}">
+                    <knock-questions userid="[[user.uid]]" questions={{questions}}></knock-questions>
+                </template>
+            </p>
+
+
             <h4>
                 Danke für deine Unterstützung
             </h4>
@@ -111,6 +125,10 @@
                 return {
                     user: {
                         type: Object,
+                        notify: true
+                    },
+                    questions: {
+                        type: Array,
                         notify: true
                     }
                 };

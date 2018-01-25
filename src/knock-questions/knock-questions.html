@@ -1,0 +1,83 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/web-animations-js/web-animations.min.js">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+
+<dom-module id="knock-questions">
+    <template>
+        <style>
+            :host {
+                display: block;
+                margin: 2rem 1rem 0 1rem;
+            }
+
+            paper-slider {
+                width: 100%;
+            }
+
+            .question {
+                margin: 1rem;
+            }
+
+            .range {
+                margin: 5px;
+            }
+
+
+        </style>
+        <style include="iron-flex iron-flex-alignment"></style>
+
+        <template is="dom-repeat" items="{{questions}}">
+            <div id="test" class="question">
+                <h4>{{item.text}}</h4>
+                <div class="range layout horizontal justified">
+                    <small>{{item.minlab}}</small>
+                    <small>{{item.maxlab}}</small>
+                </div>
+
+                <paper-radio-group id="{{index}}" class="range layout horizontal justified" on-change="answerChange">
+                    <paper-radio-button name="1"></paper-radio-button>
+                    <paper-radio-button name="2"></paper-radio-button>
+                    <paper-radio-button name="3"></paper-radio-button>
+                    <paper-radio-button name="4"></paper-radio-button>
+                    <paper-radio-button name="5"></paper-radio-button>
+                </paper-radio-group>
+            </div>
+        </template>
+
+    </template>
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class KnockQuestions extends Polymer.Element {
+            static get is() {
+                return 'knock-questions';
+            }
+
+            static get properties() {
+                return {
+                    questions: {
+                        type: Array,
+                        notify: true
+                    },
+                    userid: {
+                        type: Object
+                    }
+                };
+            }
+
+            answerChange(event) {
+                firebase.database()
+                    .ref('questions/' + event.target.parentElement.id + '/answers/' + this.userid)
+                    .set(event.target.name);
+            }
+
+        }
+
+        window.customElements.define(KnockQuestions.is, KnockQuestions);
+
+    </script>
+</dom-module>
