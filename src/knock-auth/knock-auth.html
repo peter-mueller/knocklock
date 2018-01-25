@@ -220,12 +220,12 @@
 
                             if (locked.val() === true) {
                                 this.setLockColor(2);
-                                this.toaster.text = 'KnockLock wurde geschlossen';
+                                this.toaster.text = 'KnockLock geschlossen! Zum Öffnen Muster eingeben.';
                                 this.toaster.show();
                             } else if (locked.val() === false) {
-                                this.toaster.text = 'Erfolgreich authentifiziert!';
+                                this.toaster.text = 'KnockLock geöffnet! Zum Schließen Muster eingeben.';
                                 this.toaster.show();
-                                this.setLockColor();
+                                this.setLockColor(1);
                                 this.patternRef = undefined;
                             }
                         });
