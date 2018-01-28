@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/web-animations-js/web-animations.min.js">
 <link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 
@@ -27,18 +28,26 @@
         <template is="dom-repeat" items="{{questions}}">
             <div id="test" class="question">
                 <h4>{{item.text}}</h4>
-                <div class="range layout horizontal justified">
-                    <small>{{item.minlab}}</small>
-                    <small>{{item.maxlab}}</small>
-                </div>
 
-                <paper-radio-group id="{{index}}" class="range layout horizontal justified" on-change="answerChange">
-                    <paper-radio-button name="1"></paper-radio-button>
-                    <paper-radio-button name="2"></paper-radio-button>
-                    <paper-radio-button name="3"></paper-radio-button>
-                    <paper-radio-button name="4"></paper-radio-button>
-                    <paper-radio-button name="5"></paper-radio-button>
-                </paper-radio-group>
+                <template is="dom-if" if="{{!item.istext}}">
+
+                    <div class="range layout horizontal justified">
+                        <small>{{item.minlab}}</small>
+                        <small>{{item.maxlab}}</small>
+                    </div>
+
+                    <paper-radio-group id="{{index}}" class="range layout horizontal justified" on-change="answerChange">
+                        <paper-radio-button name="1"></paper-radio-button>
+                        <paper-radio-button name="2"></paper-radio-button>
+                        <paper-radio-button name="3"></paper-radio-button>
+                        <paper-radio-button name="4"></paper-radio-button>
+                        <paper-radio-button name="5"></paper-radio-button>
+                    </paper-radio-group>
+                </template>
+
+                <template is="dom-if" if="{{item.istext}}">
+                    <paper-textarea id="{{index}}" on-value-changed="answerTextChange"></paper-textarea>
+                </template>
             </div>
         </template>
 
@@ -69,6 +78,12 @@
                 firebase.database()
                     .ref('questions/' + event.target.parentElement.id + '/answers/' + this.userid)
                     .set(event.target.name);
+            }
+
+            answerTextChange(event) {
+                firebase.database()
+                    .ref('questions/' + event.target.id + '/answers/' + this.userid)
+                    .set(event.target.value);
             }
 
         }
