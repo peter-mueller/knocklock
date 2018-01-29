@@ -134,6 +134,16 @@
                 };
             }
 
+            static _errorHandler(error) {
+                console.log(error);
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+
+                this.$.auth.signInAnonymously()
+            }
+
         }
 
         window.customElements.define(KnocklockApp.is, KnocklockApp);
