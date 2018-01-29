@@ -29,7 +29,7 @@
             <div id="test" class="question">
                 <h4>{{item.text}}</h4>
 
-                <template is="dom-if" if="{{!item.istext}}">
+                <template is="dom-if" if="{{item.isrange}}">
 
                     <div class="range layout horizontal justified">
                         <small>{{item.minlab}}</small>
@@ -47,6 +47,10 @@
 
                 <template is="dom-if" if="{{item.istext}}">
                     <paper-textarea id="{{index}}" on-value-changed="answerTextChange"></paper-textarea>
+                </template>
+
+                <template is="dom-if" if="{{item.isnumber}}">
+                    <paper-input type="number" id="{{index}}" on-value-changed="answerTextChange"></paper-input>
                 </template>
             </div>
         </template>
