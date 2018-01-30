@@ -92,14 +92,10 @@
             </template>
 
             <br>
-            <p>
-                <b>Nimm dir bitte noch etwas Zeit, um die folgenden Fragen zu beantworten.</b><br>
-                <small>Die Eingabe wird automatisch gespeichert</small>
 
-                <template is="dom-if" if="{{user}}">
-                    <knock-questions userid="[[user.uid]]" questions={{questions}}></knock-questions>
-                </template>
-            </p>
+            <template is="dom-if" if="{{user}}">
+                <knock-questions userid="[[user.uid]]" questions={{questions}}></knock-questions>
+            </template>
 
 
             <h4>

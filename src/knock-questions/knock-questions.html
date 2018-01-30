@@ -22,9 +22,28 @@
                 margin: 5px;
             }
 
+            #saveword {
+                color: green;
+                margin-left: 1rem;
+            }
+
+            #unsaveword {
+                color: red;
+                margin-left: 1rem;
+            }
 
         </style>
         <style include="iron-flex iron-flex-alignment"></style>
+
+        <b>Nimm dir bitte noch etwas Zeit, um die folgenden Fragen zu beantworten.</b><br>
+        <small class="layout horizontal">Die Eingabe wird automatisch gespeichert:
+            <template is="dom-if" if="{{save}}">
+                <div id="saveword">Alle Daten gespeichert</div>
+            </template>
+            <template is="dom-if" if="{{!save}}">
+                <div id="unsaveword">Es wird gespeichert...</div>
+            </template>
+        </small>
 
         <template is="dom-repeat" items="{{questions}}">
             <div id="test" class="question">
@@ -55,7 +74,6 @@
                 </template>
             </div>
         </template>
-        <button>Absenden :)</button>
     </template>
     <script>
         /**
@@ -75,20 +93,37 @@
                     },
                     userid: {
                         type: Object
+                    },
+                    save: {
+                        value: true
+                    },
+                    savetimer: {
+                        value: 0
                     }
                 };
             }
 
             answerChange(event) {
+                this.setSaveTimer();
                 firebase.database()
                     .ref('questions/' + event.target.parentElement.id + '/answers/' + this.userid)
                     .set(event.target.name);
             }
 
             answerTextChange(event) {
+                this.setSaveTimer();
                 firebase.database()
                     .ref('questions/' + event.target.id + '/answers/' + this.userid)
                     .set(event.target.value);
+            }
+
+            setSaveTimer() {
+                this.save = false;
+                clearTimeout(this.savetimer);
+
+                this.savetimer = setTimeout(() => {
+                    this.save = true;
+                }, 600);
             }
 
         }
