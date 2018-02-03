@@ -1,5 +1,6 @@
 getwd()
 
+par(mfrow=c(1,1))
 orginalData = read.csv("all-data.csv", header=FALSE)
 
 reference =  c(0,500,833,1000,1500,2500,3000)
@@ -48,11 +49,14 @@ dcorr = d
 summary(t(dcorr))
 
 par(mfrow=c(1,1))
-matplot(reference, dcorr - reference,lty=1 ,type="l",
+matplot(reference, dcorr - reference,lty=1 ,type="b",pch=1,
 	main="Fehler zum Referenzwert",
 	ylab="Fehler",
-	xlab="Zeit" 
+	xlab="Zeit",
+	ylim=c(-2000, 2000)
 )
+
+summary(t(dcorr-reference))
 
 #Varianz und Standardabweichung
 1/apply(abs(dcorr-reference), 1, sd)
@@ -68,11 +72,14 @@ for (row in 1:ncol(dcorr)) {
 }
 dcorr = t(na.omit(t(dcorr)))
 
-matplot(reference, dcorr - reference, pch=1, col=1,lty=1 ,type="b",
+matplot(reference, dcorr - reference, pch=1,lty=1 ,type="b",
 	main="Skalierung auf den Referenzwert am Ende",
 	ylab="Fehler",
-	xlab="Zeit"
+	xlab="Zeit",
+	ylim=c(-2000, 2000)
 )
+
+summary(t(dcorr-reference))
 #Varianz und Standardabweichung nach Skalierung
 1/apply(abs(dcorr-reference), 1, sd)
 apply(abs(dcorr-reference), 1, var)
