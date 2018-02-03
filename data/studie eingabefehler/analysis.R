@@ -112,19 +112,20 @@ sprintf("Model zum Std-Fehler/Zeit für Skalierung: |meas_last - ref_last| <= re
 
 ###### 2. Studie
 
-Versuche = 1957
 Bestanden = 1114
-Fehler = 843
 Zeitfehler = 189
 Anzahlfehler = 466
 Abweichungsfehler = 188
 
-barplot(c(Bestanden, Fehler, Anzahlfehler, Zeitfehler, Abweichungsfehler), 
-        space = c(0.1,0.1,1,0.1,0.1),
-        names.arg = c("Erfolg.", "Fehler", "Anzahl", "Zeit", "Abweich." ),
-        legend.text = 
+
+datatable = matrix( 
+  c(Bestanden,0,0,0, 0,Zeitfehler,Anzahlfehler,Abweichungsfehler), 
+  ncol=2
+)
+barplot(datatable,
         ylab="Anzahl",
-        cex.names=0.8,
-        col = c("green3", "red", "gray", "gray", "gray")
+        names.arg = c("Erfolgreich", "Fehler")
         )
-        
+text(x=1.9,y=100,labels = "Zeitfehler")     
+text(x=1.9,y=500,labels = "Anzahlfehler")   
+text(x=1.9,y=750,labels = "Abweichungsfehler")   
