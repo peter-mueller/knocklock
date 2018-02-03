@@ -110,4 +110,21 @@ plot(reference, nonScaledDev)
 abline(model, col="red")
 sprintf("Model zum Std-Fehler/Zeit für Skalierung: |meas_last - ref_last| <= ref_last * %f",model$coefficients[1])
 
+###### 2. Studie
+
+Versuche = 1957
+Bestanden = 1114
+Fehler = 843
+Zeitfehler = 189
+Anzahlfehler = 466
+Abweichungsfehler = 188
+
+barplot(c(Bestanden, Fehler, Anzahlfehler, Zeitfehler, Abweichungsfehler), 
+        space = c(0.1,0.1,1,0.1,0.1),
+        names.arg = c("Erfolg.", "Fehler", "Anzahl", "Zeit", "Abweich." ),
+        legend.text = 
+        ylab="Anzahl",
+        cex.names=0.8,
+        col = c("green3", "red", "gray", "gray", "gray")
+        )
         
