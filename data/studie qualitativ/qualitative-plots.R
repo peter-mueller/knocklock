@@ -54,4 +54,6 @@ colnames(tab) <- c("Erfolgreich", "Fehler")
 tab
 
 
-barplot(tab, legend=rownames(tab), col=c("green","red", "orange", "yellow"))
+barplot(tab, legend=rownames(tab), col=c("green","red", "orange", "yellow"),
+	main="Anzahl Erfolgreiche Authentifizierung und Fehlerarten"
+)
