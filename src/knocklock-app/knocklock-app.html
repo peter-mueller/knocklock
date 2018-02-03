@@ -14,11 +14,6 @@
                 display: block;
             }
 
-            #wrapper {
-                background-color: #ffffff;
-                margin: auto;
-                max-width: 720px;
-            }
 
             p,
             h2,
@@ -39,72 +34,8 @@
         </style>
         <style include="iron-flex iron-flex-alignment"></style>
 
-        <firebase-app
-                auth-domain="knocklock-99eb6.firebaseapp.com"
-                database-url="https://knocklock-99eb6.firebaseio.com"
-                api-key="AIzaSyCzXhSfqenZaGs1sz30vVv_gbq5HbEBsB4"
-                project-id="knocklock-99eb6"
-                storage-bucket="knocklock-99eb6.appspot.com"
-                messaging-sender-id="710999866996">
-        </firebase-app>
+        <knock-auth></knock-auth>
 
-        <firebase-auth id="auth"
-                       user="{{user}}"
-                       on-error="_errorHandler">
-        </firebase-auth>
-        <firebase-query path="questions" data="{{questions}}"></firebase-query>
-
-        <div id="wrapper">
-            <h2>Willkommen</h2>
-            <p>
-                Bist du es auch leid, dich mit einem schwer zu merkenden Code auf diversen Webseiten und Geräten
-                anzumelden?<br>
-                Wir sind es auf jeden Fall!
-                <br><br>
-                Und daher experimentieren wir mit verschiedenen neuartigen Methoden zu Authentifizierung. Eine dieser
-                ist der <b>KnockLock</b>, bei dem man sich mittels Klopfzeichen anmeldet.<br>
-                Mit dieser Webseite wollen wir erste Erkenntnisse über die Methode sammeln und bitten dich daher,
-                an unserer Studie teilzunehmen.
-                <br>
-                <br>
-                Gebe ein beliebiges Klopfmuster deiner Wahl (Klicken, Tappen, usw.) beim KnockLock ein. Wenn dieser <b>gelb</b>
-                wird, hat
-                er das Muster registriert. Gebe dieses Muster nun erneut ein, um es zu Speichern und
-                den KnockLock zu verschließen.
-                Die Farbe ändert sich hierzu auf <b>rot</b>.<br>
-                Um den KnockLock wieder zu öffnen, gebe das zuvor gespeicherte Muster ein. Wenn der Versuch erfolgreich
-                war, wird der KnockLock wieder <b>gelb</b> und du kannst ihn erneut mit dem selben Muster verschließen.
-                <br><br>
-                Du kannst den KnockLock jederzeit zurücksetzen, falls du dein Klopfmuster nicht wiederholen kannst
-                oder ein anderes ausprobieren möchtest.
-            </p>
-            <p>
-                Der <b>KnockLock</b> wird dir sagen, ob dein Versuch erfolgreich war.
-            </p>
-            <template is="dom-if" if="{{user}}">
-                <knock-auth user={{user}}></knock-auth>
-            </template>
-
-            <template is="dom-if" if="[[!user]]">
-                <div id="loading" class="layout horizontal center-justified">
-                    <paper-spinner active></paper-spinner>
-                </div>
-            </template>
-
-            <br>
-
-            <template is="dom-if" if="{{user}}">
-                <knock-questions userid="[[user.uid]]" questions={{questions}}></knock-questions>
-            </template>
-
-
-            <h4>
-                Danke für deine Unterstützung
-            </h4>
-            <p>
-                Peter Müller, Renè Z.
-            </p>
-        </div>
     </template>
 
     <script>

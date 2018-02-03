@@ -93,7 +93,6 @@
         </paper-button>
 
         <paper-toast id="toaster" class="fit-bottom" text="Versuche mich zu knacken!"></paper-toast>
-        <audio-detector id="detector" on-hit="onTap" treshold="3"></audio-detector>
     </template>
 
 
@@ -109,9 +108,6 @@
 
             static get properties() {
                 return {
-                    user: {
-                        type: Object
-                    },
                     knocklock: {
                         type: KnockLock
                     }
@@ -127,7 +123,7 @@
 
                 knock.addEventListener('mousedown', this.onTap.bind(this));
 
-                this.knocklock = new KnockLock(this.user.uid, toaster, knock);
+                this.knocklock = new KnockLock(toaster, knock);
                 knock.addEventListener('click', e => {
                     this.knocklock.recordTap();
                 });
@@ -163,14 +159,12 @@
 
         class KnockLock {
 
-            constructor(uid, toaster, lockButton) {
+            constructor(toaster, lockButton) {
                 this.taps = [];
-                this.refcode = [];
+                this.refcode = undefined;
                 this.timer = 0;
-                this.userID = uid;
                 this.toaster = toaster;
                 this.lockButton = lockButton;
-                this.patternRef = undefined;
                 this.locked = false;
             }
 
@@ -206,24 +200,14 @@
             }
 
             processTaps() {
-                if (this.patternRef === undefined) {
-                    this.patternRef = firebase.database().ref('testsubjects/' + this.userID + '/')
-                        .push({
-                            refcode: this.taps
-                        });
+                if (this.refcode === undefined) {
                     this.refcode = this.taps;
                     this.setLockColor(1);
                     this.toaster.text = 'Zum Speichern wiederholen';
                     this.toaster.show();
 
                 } else {
-
-                    this.patternRef.push({
-                        data: this.taps
-                    });
-
                     this.checkTaps();
-
                 }
             }
 
@@ -278,7 +262,6 @@
 
             resetlock() {
                 console.log("Knocklock reset");
-                this.patternRef = undefined;
                 this.refcode = undefined;
                 this.locked = false;
                 this.setLockColor();
