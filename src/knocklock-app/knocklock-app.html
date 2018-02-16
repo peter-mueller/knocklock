@@ -34,7 +34,19 @@
         </style>
         <style include="iron-flex iron-flex-alignment"></style>
 
-        <knock-auth></knock-auth>
+        <firebase-app
+                auth-domain="knocklock-99eb6.firebaseapp.com"
+                database-url="https://knocklock-99eb6.firebaseio.com"
+                api-key="AIzaSyCzXhSfqenZaGs1sz30vVv_gbq5HbEBsB4"
+                project-id="knocklock-99eb6"
+                storage-bucket="knocklock-99eb6.appspot.com"
+                messaging-sender-id="710999866996">
+        </firebase-app>
+
+        <firebase-auth id="auth"
+                       user="{{user}}"
+                       on-error="_errorHandler">
+        </firebase-auth>
 
     </template>
 
@@ -68,7 +80,64 @@
             connectedCallback() {
                 super.connectedCallback();
 
-                this.$.auth.signInAnonymously()
+                this.$.auth.signInAnonymously().then(() => {
+                    firebase.database().ref('testsubjects').once('value').then( snap => {
+
+                        const testsubjs = Object.values(snap.val());
+
+                        let passes = 0;
+                        let codes = 0;
+
+                        testsubjs.forEach(user => {
+                            const userTries = Object.values(user);
+                            userTries.forEach(t => {
+                                codes += 1;
+
+                                testsubjs.forEach(otheruser => {
+                                    const otheruserTries = Object.values(otheruser);
+                                    otheruserTries.forEach(othert => {
+                                        if(t.refcode !== othert.refcode)
+                                            passes += this.checkTaps(othert.refcode, t.refcode)
+                                    })
+                                })
+
+
+                            })
+                        });
+
+                        console.log('Codes: ' + codes);
+                        console.log('Passes ' + passes)
+
+                    })
+                })
+            }
+
+            checkTaps(tryData, refcode) {
+                // Parameter for Authentication
+                const maxScaleErr = 0.31;
+                const maxErr = 185;
+
+                //Fehlschlag bei ungleicher Länge
+                if (refcode.length !== tryData.length) {
+                    return 0;
+                }
+
+                let lastIndex = refcode.length - 1;
+                let lastErr = tryData[lastIndex] - refcode[lastIndex];
+
+                //Fehlschlag falls Zeitfehler für Skalierung zu hoch
+                if (Math.abs(lastErr) > refcode[lastIndex] * maxScaleErr) {
+                    return 0;
+                }
+
+                //Skalierung aller Werte und Fehlschlag bei zu großem Fehler
+                let scale = refcode[lastIndex] / tryData[lastIndex];
+                if (tryData.some((timestamp, index) => Math.abs((timestamp * scale) - refcode[index]) > maxErr)) {
+                    return 0;
+                }
+
+                //Passed Validation
+                return 1;
             }
 
         }
