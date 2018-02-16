@@ -93,8 +93,8 @@ datatable = matrix(
 barplot(datatable,
         ylab="Anzahl",
         names.arg = c("Erfolgreich", "Fehler"),
-        main="Anzahl Erfolgreiche Authentifizierung\n und Fehlerarten"
-        
+        main="Anzahl Erfolgreiche Authentifizierung\n und Fehlerarten",
+        col=c("lightgreen", "lightyellow", "lightcoral", "lightblue")
 )
 text(x=1.9,y=100,labels = "Zeitfehler")     
 text(x=1.9,y=500,labels = "Anzahlfehler")   
