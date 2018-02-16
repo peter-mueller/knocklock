@@ -1,65 +1,45 @@
 Person;BewertungEingabe;BewertungSicherheit;ProblemeSpeichern;ProblemeEntsperren;BevorzugenVorPasswort;QuelleKlopfzeichen;TŠtigkeit;Alter
 answers/0rMGyCErcvOzZvRIxhQYJ8zYp1a2;4;2;3;2;5;;Wissenschaftlicher Mitarbeiter, Chemie;28
 answers/0tMVNggVrlVZ6qgDZlBjeR5D3U93;2;1;3;3;5;Bekannter Rhythmus;Lehrerin;51
-answers/1Zy2OKy34sVuHikk2NT2o9nHFry2;1;2;1;1;3;bekannter Rhythmus;Wirtschaftsing;23
 answers/1nSUZcLVwLRasjbroGpYcw575Z52;1;4;1;1;4;Eine meiner Lieblingsmelodien;Student der Buchwissenschaft;18
 answers/2CKQGamNOcb4sOPaXv6MiMzUyWC2;1;2;1;1;4;bekannte Melodie;Tiermedizin-Studium;18
 answers/2EyLzAtaL6Yla95KgHDUNh8Tar22;2;2;1;4;4;gängiger Anfeuerungsrhythmus bei einer Sportveranstaltung;Doktorand in der Lateinischen Philologie;27
 answers/2dBccM3qcsTFAtCXhYXTIm9BJe52;1;1;1;1;5;Rhythmus eines Liedes;Philosophie Studium;23
-answers/2n6epsYK7sRbvQzJxqgx6K70Aei1;3;4;4;3;4;;Physik;19
 answers/3lGPj0ylyFZgZHeFlU5BcBKdsCF3;2;2;2;2;5;;;
-answers/3qqwGWLRWCYAs0a2eq9g6AeOwbh1;2;2;4;4;5;Ich hab mir Rhythmen selbst ausgedacht oder mich an Musik orientiert.;Ich studiere Software Engineering im Master.;21
 answers/48dBxaaAg6NzuCUdQXtE3Ymy30m1;2;4;4;1;5;;LA Gymnasium;20
 answers/4U7pDXZ2jKPBZQElqPctcHDqJNo1;3;1;4;2;5;Habe mir überlegt wie viele sinnvolle Kombinationen es geben könnte und dann einfach eine ausgewählt die einfach einzugeben war ;Wissenschaftlicher Mitarbeiter (Bereich Usable Security) ;30
 answers/4cQnDUl5Z6N6ykYJGQLnaFlN00n2;5;5;5;5;5;eine Melodie;Wissenschaftler;50
 answers/4lwR58sLsVbTaKC0fL8yVwrIZzc2;3;2;1;4;2;Pokemon Black&White Item Obtained - Melodie;Phonetik und Sprachverarbeitung;18
 answers/4yFF7cbejRX8IbP7iXxfRKr0eVZ2;4;2;1;4;5;Komplexer Rhythmus;Studium Humanmedizin;21
 answers/5gs4TPbUdTcd8XB72nfDYnzFVo72;4;2;4;1;5;spontan ausgesucht;Lehramts-Studium;20
-answers/5ygBMTTiYSfObeTS98VYW3ZH5Vh1;2;1;4;4;5;Melodie (aus Ermangelung eines Kommentar-Felds: Im manchen Browsern führt Doppel-Tap zu Zoom, was die Eingabe des Musters unmöglich macht);Informatik;25
-answers/62HPGJYfnHT3QfWvhiL9y9asOcT2;1;2;2;2;4;Ausgedacht;Informatikbachelor;22
-answers/6B44u8hgomhlrSzdskEUhMSojMv1;2;2;3;1;5;was einfaches. Schwerere Klopfzeichen sind schwerer zu merken als übliche Passwörter;Physik-Technikerin;30
-answers/6CEZS96tuOWKV5kfgsJkQ97Y4uz1;2;4;2;2;4;spontan;Naturwissenschaftler;44
 answers/6Eodfj9GMlckURikj90q1Dpm2Lo1;3;2;4;1;1;Intuition;Prof.;40
 answers/6F808DOylRXUhPKxX5h1MErs6BL2;2;1;1;2;4;spontan;Doktorandin/Geographie;28
 answers/6k6MHNPVs1V8TN2baMuWoXNyiyd2;2;4;;;;;;
 answers/7YK98PKznVdbR12Qch0A7BWP3Ib2;1;2;1;1;3;erste Kombination, die mir eingefallen ist (vertrautes Muster );Psychologe;31
 answers/7ntqHbo86rVVx6Py0STBmThbvfy2;1;4;1;3;2;Intuitiv die Zahl drei, aber das wäre in der Realität sicher ein anderes muster, z.B. ein Liedrhythmus oder so;Verwaltungsangestellter;35
-answers/7oetuCKCCOU78TZk0bfuerJeltc2;1;1;4;1;5;Zufällig;Physik;22
 answers/886wzPO2n8cDXCKZp9ds4WwKCAj1;1;2;1;1;4;Melodie;BWL Bachelor;22
 answers/8PiED1icv8fmebhk3BreXjSdtrH2;1;3;1;1;1;"Beim ersten Versuch hab ich den Rhythmus eines Songs im 7/8 Takt genommen. Beim zweiten Mal wollte ich etwas ""sichereres"" und habe eine Mischung aus Triolen, Überbindungen und punktierten Noten probiert.";Lehramt Gymnasium (Mathematik, Musik);22
 answers/9ORHrP0TPiO3BohPvaRCPlMABOn2;1;2;2;2;5;"Bekannte Rhythmen im Kopf ""gesungen"" ";Studium;20
 answers/9r3sVWt0kKcVkeLSl6GdOy7OiiQ2;2;3;3;4;4;Sport Anfeuerungsrufe und Rhythmen aus dem Musikunterricht;Psychologie;20
 answers/9xcBNJosoLc5vzNmYshiPskzmso1;1;3;1;2;4;Verschiedenes, z.B. der Rhythmus eines Liedes oder Klopfmuster, die mir schwierig erschienen (also die jemand anderes durch bloßes zuhören nicht so leicht nachklopfen könnte);Masterstudium Psychologie;23
 answers/9zqABrLflFfeqVzsU3KEc9qetvc2;1;4;2;2;2;kA;Wissenschaftl. Mitarbeiter / Doktorand;32
-answers/AMZgs4d58TT9uTltVr33dkeOVuL2;1;2;1;1;4;Weiß ich nicht...habe mir etwas simples ausgedacht, das schnell geht - eig nur zum Testen;techn. Angestellte im öffentl. Dienst;24
 answers/Afn7wC2IFIZVSNP9Ni6SF50Hgd63;1;2;1;1;2;Ganz spontan;Sekretariat;56
 answers/BDnNubTpM9bCK01MAd6aEXmx4z73;4;4;5;2;5;hab an das SOS -Zeichen gedacht;Studium Psychologie ;38
 answers/BfgTagnBErRkovb6csWs8iMjXtY2;2;2;1;1;5;Rythmus muster im kopf;Student (Jura);18
 answers/BmDLxym2W8QY6jbeR9n0nGS7uKp2;1;3;1;1;1;Bestimmte lateinamerikanische Rhythmuspattern;Lateinischer Philologe;30
 answers/C4iRtOiNo4gvbMr0SZpk80XzaiB2;3;2;3;1;3;1x Song, 1 x Morsezeichen;Sinologin;39
-answers/CIE9eHV4FXMkIar9rNrm0IwhLjh1;3;2;2;4;3;Musik Rythmus;Studium MedieninformatikS;28
 answers/CMOjRQ7vH1PTGOkqlC55S7VtqKv2;3;2;3;2;5;Musik;Germanistik ;20
 answers/Ck5udWt8pfVqDN6PIGEVVGXtnqR2;2;2;2;3;2;Morsecode, Rhythmen aus Musikstücken;Musikwissenschaftler;34
-answers/CrifTkyLn3hxqSHJ08ihM7y2nuz1;2;2;4;2;5;indelligenß;infomadigg;27
 answers/CwD0zg2pCAX4IOVUsNfJDmWtTLz1;1;2;1;1;5;Lied;Verwaltungsangestellte;60
-answers/DIbMSaWKvJb7RAPanQ4UpPxvqSP2;1;4;1;1;1;Das gibt es schon für den Mac.;CIO;51
 answers/DNZAeCvM54Yt3UJYvIhU1IfonRm2;1;3;1;2;5;Zufall;Jura Studium;19
 answers/DiFSzFRB2MhoUc3WdAW1jgutJ8p1;2;3;2;1;4;;;
 answers/Dno7Va6f2ASPEG1p85LcpnoMxlo2;1;4;1;1;3;Zufällig ;;36
 answers/Dxu40axGxCbjgiW0OIoj8KFsJbd2;2;5;2;1;1;Teil aus afrikanischem Trommel-Rhythmus;Philosophie;67
-answers/EGIY6szPFpP911KyxBSHgS3y4Sj1;4;3;4;4;3;Herum spielen, es ist allerdings nicht ganz klar, wie es genau registriert wird bezüglich Dauer eines Taps.;Informatikstudent;27
 answers/EWuQI5Ug3WM68XJdoSlUt6e0GN13;1;4;1;1;2;;;
 answers/EXq3V5a27AVEYsioWDNKJY6iiI42;5;3;5;5;5;Musik im Kopf;Verwaltung;50
-answers/EYakFrfYXJbjYqc08Y2BlVgYq6w2;2;3;1;2;3;musik;studium medieninformatik;23
-answers/Ew6kM9Z62KQjRdnlT6VpliyuoOj2;2;4;1;1;2;;Studium Wirtschaftsinformatik ;23
 answers/F4rgAv1FrgZh45eaEZQRtL6ijf02;2;3;1;2;4;;Epidemiologin;28
 answers/FKoIlsMBdRbFdyOguMCFmYVMDyT2;4;3;1;1;5;Ich habe einfach geklickt.;Soziologie;28
 answers/FX7VuT9dVffiE7tYXd4S6b5zgEf2;1;2;1;1;5;erster Gedanke;Student;24
-answers/GC4Kl5jBEHTv4U9v6LCqIwEECGF2;2;1;2;2;5;das erste was mir einviel nachdem ich an klopfzeichen dachte...;Informatik;27
-answers/GTTnSpPE1jXWS0BdD099twX4FzH3;4;4;3;2;2;Takt von einem Lied;Medieninformatik;25
-answers/HCCjh6vYkyRZ37PFdpWejpEPHc42;1;3;1;1;3;"Intuition
-
-";SAP Entwickler;26
 answers/HPHn40iOZMW42G10oPLNw6iRBAq1;1;2;1;5;5;E-Mail vom Infodienst der LMU München;wissenschaftlicher Mitarbeiter;32
 answers/Hbb76ZpOBac2X1ubZU2XUuJQy872;2;4;1;4;3;Spontan, einfach zu merken, logisches Muster;Doktorand, VWL;27
 answers/I1awMjzIW4g123Beas7Kq9Csral2;2;3;1;2;3;Hab geklopft;STUDENT4LYFE;23
@@ -67,50 +47,29 @@ answers/INydHOGJydRc4moqawqJ0d4k26k1;2;3;1;3;5;Lmu newsletter;Medizin student;20
 answers/IZLvoVB4wWP1R9GEY7HVARFeOTA2;1;2;1;1;3;akustische Erinnerung ;Public Health ;30
 answers/IdN9dkA0hbhz9bnEimF0OEbTGvH3;2;4;2;2;3;willkürlich ausprobiert;studiere Medizin;19
 answers/JNnCkdhM3iY9E50Rnz5Zpp3d4R52;1;3;1;1;2;E-Mail;Student (VWL Bsc.);42
-answers/JVELZipNV3hdMxHWcWdNHalHytt1;3;1;3;1;5;Kollege;IT;
 answers/JY9Pd4fyXQRVo0Oz1foeLyK9UOB3;4;2;4;4;4;Musik im Ohr;Doktorand Biologie;27
-answers/JnYkeJa5okRjZgLz3fH4YSaFKJy2;2;3;1;1;3;Intuition;IT;25
-answers/JoDHdEqzxgPi4oUCwEXa329AT5s2;3;2;4;2;3;"Musik beat :)   ---- da es kein feedback feld gibt: UI sehr hübsch, bei keypress passt di animation aber noch nicht ganz. Bei Mouseclicks klappts. 
-
-Das Autosave im Formular finde ich nicht gut kommuniziert. Good practice wäre ein button...  Habe erstmal nach dem Save Button gesucht.";PhD in HCI;27
 answers/JvrxbbbguLWVydH6OSOSuyfynFU2;1;5;1;1;3;Was mir gerade so in den Sinn kam :);Doktorandin;26
 answers/K2SVDPSlPMh2hcyjBMtjY7VuxWM2;1;2;1;1;2;-;-;22
-answers/K8UyfobSZQdd2YiLSSjt57ev0gY2;4;1;1;1;5;Morsecode SOS;IT Security Specialist;26
 answers/KGnm8iu27gTmQ4lGAnQnVXxw7EO2;5;3;5;5;2;Intuitiv ;Geschichte ;23
 answers/KVW6IZ2orMMnohoSkCUpvKreKjj2;1;4;2;4;5;Typisches Klopfzeichen;Medizin;21
-answers/Kkp7rftcuUXx5upn3GIwI9y2OYl1;2;3;2;2;3;intuition;medieninformatik;20
-answers/L0bh8JN0XrgpFO5k0cJhu6xPs0d2;2;1;1;1;5;Typischer Fanfaren-Rythmus: Dam-dada-da-da--dam-dam;Wissenschaftlicher Mitarbeiter Software-Verifikation;25
 answers/LJzjwqRPWYTJf4ZBZNtBqISiLPl2;2;2;2;3;3;einfach so;musikwissenschaft;18
-answers/LjZ4raWUdkSPMxep2o9HITU8F6a2;2;2;2;1;2;Takt der Musik ;Fachinformatiker ;18
-answers/M1eWXZLPkTUORpDOa0f8ezEQUkH3;1;3;1;1;3;Link von einer Freundin bekommen;Senior Developer;29
 answers/MH5crIRu7IddYCarb9ArBMejSlC2;3;4;2;3;1;;;
 answers/MOWi0XA1M8OHbpnTLJN5Ahrxmdq1;5;2;5;;5;Nachdenken;Forschung, Philosophie;37
-answers/Mr6DZoAbwGVztWRspmlYuuHCcY22;2;2;4;4;4;Zufällig gewähltes Muster;Student / IT;40
 answers/N2i2I19Uwqh6NzOnqZe0mYCK3Yt1;1;5;1;1;1;Intuitiv probiert;Verwaltungsangestellte;26
 answers/NvK8rboOgUfQuFN1x6p6snfuuCW2;1;2;1;1;5;;;
-answers/O3OSVHpPimZkLtiktq4qgPYjpty1;4;2;1;1;5;zufällig;Ingenieur;29
 answers/O5LLWIfqgiMBvVydcGtUjHPAjDj2;2;4;2;3;2;Muster-Rhythmus-Kombination;Betriebswirt;30
 answers/ODovXiVQ8fVCbN9e2LlWNkj4U742;1;3;1;1;3;Bekannte Melodie aus Kindheit;Student der Rechtswissenschaften;21
-answers/OTjbcId5qhM8pptZeSXeDtexUsH3;5;3;1;1;4; ;Wirtschaftsinformatik;26
 answers/OVBSZgbet7h1q0Ynm5mpbbWmCFu2;3;2;4;3;4;Vibrationsmuster Handy;Medizinstudent;20
 answers/P2JE9dw8gWOKpOkFQZTGzSFfNjw1;4;2;1;4;5;"Das Klopfsignal von Sheldon Cooper an Pennys Tür in ""Big Bang Theory""";Sprachwissenschaftlerin;39
 answers/P3igOUh7OpXO5jUdg8s9SYTa3Zp1;4;3;4;3;4;Spontan ;Student (Psy);20
 answers/P9UJemBO60Xc7HGaJV5gFqrz6dK2;3;5;2;3;3;Lied;BWL Studium;20
-answers/PJSKZe90j2UwkHWJ9tfxh0qS8L32;5;2;5;5;5;Spontan ausgedacht / Melodie der musik, die ich gerade höre;Geographie/Informatik Studium;21
 answers/PYkJuCCf7OYmCqO1jKSdL7fquj22;1;4;1;1;2;Musik;Verwaltungsangestellte;49
-answers/PoDRT4nQUAaw0Nlr72qKOb39ayV2;1;1;1;1;5;Rhytmus;Informatik;25
 answers/Qtg269K979P5NiRKH1nzJghiQ933;1;3;1;1;5;spontan geklickt 3 x;Klass. Archäologie;43
-answers/R5OhzsofzDYwiVHi28N2kLJNQVo2;2;1;4;4;5;;Informatiker;59
 answers/R5siUpiGqUgD7gkhtmCC1M3HJay2;5;1;5;5;3;intuitive;Psychology;28
-answers/S6x6M54xi1e08auoPh5MLzxqs6N2;1;2;1;1;4;Melodie;Physiker;
-answers/SAK8o51DW5eNh6aeFHh6niFJc9g2;2;3;1;1;1;Rhythmus den ich im Kopf habe;Studentin der Medieninformatik;19
 answers/Sk8tXnKFwqbxS2jwKOqXRggAzMI2;3;2;3;3;4;Melodie im Kopf;Statistik;36
 answers/So1sE2voYvYIhox3X00dKc8qzxt2;3;1;3;3;5;;;
 answers/SpjjW7eK2se6xQMS5QO7SPwKDz63;1;;;;;;;
 answers/T4u0jXoi9Basb2giwgiN64Pc5Kk2;2;2;5;5;5;Zufall;VWL;21
-answers/TuVUW6sGyQglBPtURtx6AclgpuE2;1;2;1;2;1;Von nem Soundtrack;Software Engineer;31
-answers/UJ25C5E6ZBYxXjXKSQ5tHRgnKW13;2;3;3;1;1;Rhythmus aus einem Lied;Student, Physik;26
-answers/UaT3VbbRiPRyo0iLW6S0kAGiTAy2;3;2;1;5;4;Intuition;Studium Informatik;25
 answers/UuCDdPYug9cDjvg76opwyxPPNwm1;1;2;1;1;2;Takt/Melodie eines Liedes;Ich studiere Humanmedizin;18
 answers/V1ETrXLGNnPhjV4eVesaUP7mJVG3;4;4;4;1;3;spontan;Studentin der Humanmedizin;18
 answers/VMMhr6AzmMMcgWGuHkobzmwo0rv2;3;2;3;2;4;Einfach n paar mal was ausprobiert;Studium: Politikwissenschaft;20
@@ -119,7 +78,6 @@ Aber ""Alle meine Entchen"" hat auch funktioniert =)";Wirtschaftswissenschaften 
 answers/Vj6MvL6imdhi81vOnptM4a5wEOg2;2;3;1;1;4;Refrain von einem Lied, was ich grad im Kopf hatte;Chemie;14
 answers/WMqza7UPeBTioWlaymeQ3v9WtMi2;1;3;1;1;3;Reiner Zufall;Wirtschaftsinformatik;27
 answers/Wa8gP3sUZ3Qa7LNtOWpB4kHOc1w2;2;2;2;2;5;Melodien, Name;Humanmedizin;27
-answers/WcK5zXDJCVXTnQOwUxWuM45RTTX2;1;1;1;1;4;OK wenn man eigenes Büro hat, bei mehreren Leuten in einem Raum zu unsicher ;IT;40
 answers/WswcSmVI0tYplR0RazqIpnDG0Wq1;3;3;1;1;5;Intuitiv, sehr einfaches Muster;Wissenschaftsmanagerin;29
 answers/WxPDLfI7chfhmMq0OyRr1E9PmiU2;4;4;1;4;3;Musikzeile;wissenschaftl Mitarbeiterin;44
 answers/Y1sSSF3DnMdYGxCQaqXh4upBNw23;3;1;4;4;5;Intuition;" 
@@ -127,17 +85,13 @@ answers/Y1sSSF3DnMdYGxCQaqXh4upBNw23;3;1;4;4;5;Intuition;"
 
 ";65
 answers/Y82GPSmqV0Wu1MXyJs1HoLMDflc2;1;4;1;1;2;Liedtext;Angestellter;47
-answers/YZIMOnfEmCZZfTRTWSqvB763FVa2;3;2;2;2;5;Zufällige Eingabe;Studium Informatik;30
 answers/YeEEEGWDb2eREGl7sWYo2qKNtB12;2;3;1;2;4;"Das ist der Anfang von Richard Strauss ""Alpensinfonie""";Student (Rechtswissenschaften);25
 answers/YvWhlSJyoLephi3siHPsunCeDZk2;1;;;;;;;
 answers/Z2sOjYbjLGeKgeF160ccWTDALTu1;2;3;1;1;3;§ 126a BGB;Jurastudent;21
 answers/ZWUIjdveIPeMSU2BcffLLtneNoI3;2;1;2;1;5;Ausprobieren;Verwaltungsangestellter;38
-answers/ZeUj0AD3FARwSVEAMAuNZ1Y8JGo2;1;3;1;1;4;Zufall;Ingenieur;36
 answers/ZhBGSKb2kHPGVv3Si0WboJI46M83;1;3;1;1;2;Einfach einen Rhythmus ausprobiert;Wiss. MA;47
 answers/Zl6bFgpJLnb0LlqhGOw2iqHMl0A2;5;1;5;5;5;Intuition, zufall...;Latinistik;2
 answers/Zt18fstGxISW6iKTxK877KqBYSY2;2;3;1;1;3;Lied;Studium Buchwissenschaften;19
-answers/a6cPT2cWA7NLwHb2DXvggqWvJs72;3;1;4;2;5;E-Mail;IT-Leiter;43
-answers/aIGKajAZfqfia6QgYks5iZmPEzN2;2;1;2;2;5;Musik;Veranstaltungstechnik;26
 answers/aIK5DUkZzebxL4GoC1eHLSakuQG2;5;;;;;"Ein Kopfzeichen habe ich nicht. Nur ein Klopfzeichen. Lolololol tolle Speicherfunktion!!!bdjdjdjdjdjdjdjsj
 
 
@@ -167,7 +121,6 @@ answers/bgr7MLOAepQcBh6tMUMauw37vvF3;3;4;4;5;4;Bereits bekannte Rhythmen verwend
 answers/blS56jGfa1QOzhGcIIr3FzrfnuD2;4;5;3;5;5;Hmmm ;Medizin;39
 answers/ce0yXFYMZqN1vqONC2YgOPtGwMa2;5;1;5;5;5;Zufall;Studium der Medizin;21
 answers/dbbYlXc1ZsNO9Eg555WzZnU8Lyw1;1;2;1;1;5;keine Ahnung;Philosophie;26
-answers/dopL2hMAwGTvVu2YxeUZgyjMxPf1;1;1;1;1;5;Spontane Idee;Studium Mathematik und Wirtschaftswissenschaften;22
 answers/eYq8p2tmjEfNaJvX8w8YjL2GLcz2;3;2;1;4;4;Spontaner Rhytmus;Wiss Mitarbeiter;27
 answers/enyEv92fAXWlFo1bIrWD4ewYCO33;1;1;4;5;5;Spontan;Pädagogik Student ;19
 answers/f6d5ORXZnERj7ywpkkzMRrspP1H3;2;2;5;5;2;;;
@@ -177,13 +130,11 @@ answers/g3Rj9BtSIvbWd7QR0aaErLeCOZl1;1;3;1;1;1;Ein bekannter Rhythmus;Öffentlich
 answers/gClHuqnmOMVuFhsuXohGFOnrdmp1;2;1;5;4;5;Klassische Musik ;Chemiestudium ;19
 answers/gHngEZ3CWyXqmOKMdwddpEyrdh93;3;2;2;3;3;;;21
 answers/gsdqg4mknccgmV1QHyW93lDRofs2;2;3;1;1;;Erinnerung an ein bereits existierendes Klopfzeichen;Allg. Sprachwissenschaft;33
-answers/h2aMJ2NNdKcBPD5BlcmUDpvGwUJ3;2;1;2;2;5;Rhythmus;Wirtschaftsinformatik;33
 answers/hA6v95wf83ZFt6SGcUEy8tIgPuq1;1;1;1;1;5;Stabreim, nicht sehr versiert.;Geschäftsführung;40
 answers/hCC8b9GKYiX18i78AgIWLa4e2Hs2;1;4;1;1;1;spontaner Rhythmus;LA Sprachheilpädagogik;20
 answers/huB12GAAXtW7awO6fOPyiptGBx13;2;2;1;2;2;Eine Melodieausschnitt aus einem mir bekannten Musikstück;Verwaltungstätigkeit;35
 answers/i8MdTHcRHPgKWGzq45EKivViuFs2;3;2;4;4;4;Musik, bekannte Melodie;Chemiestudium;22
 answers/iSEJLTB4L8YOEu7nx3LDDN5uHKw2;2;2;2;2;3;Das Finden war für mich ggü. einem Passwort tatsächlich sehr schwierig, zumal auch keine akustische oder haptische Rückmeldung vorhanden war. Ich würde eine Authentifizierung mittels der Hüllkurve beispielsweise der Lautstärke eines Tonsignales bevorzugen, da diese im Gehirn auch ohne Wiedergabe des Tonsignales für einen Großteil der Menschheit  intuitiv und sehr leicht reproduzierbar ist. Dieses sich selbst vergrößernde Text-Eingabefeld ist im Übrigen großartig und sollte in sämtlichen GUIs im Kundendialog über das Internet eingesetzt werden :-);—;
-answers/iSQWoEUOHnPAWjSiO862BgmbCKO2;2;4;2;1;2;habe mir einen Rhythmus im Kopf überlegt und dann getippt;Studium Informatik;24
 answers/j1MPcGS91DTwzhzsGSI042paK2H2;2;1;4;1;2;Kenne ich seit 40 Jahren;Webkoordinator;60
 answers/jH8CbTIm52UxoqkG2HyOvcp30Ru2;1;3;;1;4;Spontan;Tiermedizin studium;22
 answers/k8GrfnHzA0MqBxuYvUsGMgQe9ZF2;4;2;5;1;5;Rhythmus einer Melodie ;Humanmedizinstudium;19
@@ -194,36 +145,23 @@ answers/lt3KiigrUGZsTbJIvJFOkkVSvwr2;3;5;4;4;2;;wissenschaftlicher Mitarbeiter;3
 answers/m1UsEP1qlaXWJMqbAzgtmAhAEgo1;1;2;1;1;4;ohne spezielle Assoziation;Doktorandin Gesundheitswissenschaften;24
 answers/mjjmsaVYeJWnxXApt8TvlFEct3p1;1;1;1;1;2;Musik;Arbeitslos;18
 answers/mlGgop5BvDeKfwm8AMbPyjFSQUx1;3;2;3;4;4;willkürlich, aber mir sind auch nicht so viele Folgen von Klopfzeichen eingefallen außer Kombinationen von größeren und kleineren Abständen zwischen den Klicks;Germanistin;28
-answers/nYWDyl2p44Y5PWuqr429RqGfYSi2;4;5;2;4;3;Musik (Rhythmus);Software Engineer;27
 answers/ohE4KoVoDUVEjmkVzTr63jQRkRG2;3;1;1;1;5;standard rythmen...;Student;
 answers/owRC4NgFOiNKRpteLT8BKDHHId83;1;2;1;1;4;bekannte melodie/rhytmus;PhD ;26
-answers/p3NyZbvWUnPlXwCD74gSsYpVN342;2;3;4;3;3;Musikstück;Maschinenbau Masterstudium;23
 answers/q22y0dgqAQcLSaureTd9k73HeEP2;4;2;1;1;5;Zufällig;Statistikstudium;28
 answers/q3DUHPPDT5XGaMdbTgcittcxGHm2;1;2;3;1;1;SOS;Kommunikationswissenschaften;25
 answers/qP8xP289VnfH2isBXUU0jLx9gwA2;2;2;1;1;4;Musik;Medizinstudent;19
 answers/qQaeXUktbnbnuAAsbF1n6nPqoYW2;2;1;4;4;3;Es ist der Anfang eines Lieds;Arzt;60
 answers/rawnY8BRkwfUw5ORQrjY46vRsgU2;4;1;5;4;5;Dachte irgendwie an einen 3/4 Takt gedacht, den ich 6 mal wiederhole (obwohl der nicht so wäre, kann ich es mir damit merken. Das ist wohl auch eines der schwierigsten Fragen: wie findet man einen guten Rythmus).;Wiss. Mitarbeiter (2ter Versuch des knocklock);34
-answers/repwwpduBnTKPLXizKngDp1ll0L2;2;3;3;4;3;Liedmelodie;Ingenieurin (Elektrotechnik);24
 answers/sY8ld8gUBNVNjW1a2SzEBNy2tpL2;2;2;1;1;3;Nach Gefühl ;Schüler ;17
 answers/sZ1X9bppK7WXMQ1MTXY9RkZV1Vi2;2;2;4;1;5;Klang meines Namens;Medizin;19
 answers/smcsjR0ejGUcNg2Pbpt5i9fxjKH3;1;1;1;3;5;Takt;Angestellte;50
-answers/ssGTvk6QFJa9vmxIfQjSIxU6dFW2;3;1;3;1;5;;Informatikstudium;21
 answers/ssToIuYI0ncRKqIIZ3efZkWoL5r2;3;3;4;4;2;spontan;Tierärztin;35
 answers/svb1JGevVgMjCGvsz0Yjmlp9OVY2;3;1;4;4;5;Spontaner einfall;Tiermedizin;22
-answers/ta0wp9hlCOa3et7IBHo8bIAuCaH3;2;3;4;1;3;Spontan;IT ;32
 answers/tn04zPoFn0QtOGfnXpXs208WMIf1;3;4;5;4;2;Intuitiv ;Bildungswissenschaft/Pädagogik und Soziologie Studium ;30
 answers/u6HWpeGehret6oBoE2BhoZHWrZJ3;1;3;1;1;4;Spontan;Wissenschaftl. Mitarbeiter;35
 answers/uCemmOtrkwTVqsFrNye2c4n627e2;1;3;3;1;4;;;
-answers/vU8t35SizlVRy3QIGnQAmgRN06z1;2;1;2;2;5;Rhythmus eines mir bekannten Liedes;Student der Computerlinguistik;20
-answers/vgqdpOU7WGbPinBcWp6KDCtdBc23;1;3;2;2;5;FK07 Gruppe auf FB;Informatik (Bachelor);21
 answers/vtVixLGRBkR2Y9sIcCwDsFvKDrs1;4;2;5;3;5;;Soziologie Master;26
-answers/vuJZLS8WRdU2BkWrtGSmoR0eJYf2;1;2;1;1;5;Spontan;Softwareentwickler;21
 answers/vyorrLH6PbfG31U9eHICvU5mpu82;2;2;1;1;5;Bekannter Rhythmus;Student in Economics;24
 answers/wiIjKM00F7RxzDOCDFWwvqObqB33;1;3;1;2;3;Spontan;Medizinstudent;21
-answers/xCwhm1KcGzQWtkIO4QalQg8I4Ky2;2;2;1;1;5;Spontane Eingebung;Programmierer;35
-answers/xU9hnGBSbcNbhnruX6HYzFE04o62;1;1;2;1;5;Melodie;Medieninformatik;23
 answers/yT4rroBrgZQArYrh9YMUm20uoNv1;3;2;4;2;4;Zufall;Kauffrau ;38
-answers/zDfVbUwW3oP0EsuEa4Oxf9KhPlc2;4;2;4;1;4;Eindeutige Abstände, leicht zu merken ;Medieninformatik ;20
 answers/zRBiImj6pzMWutpaUAUvw1law6y2;2;3;5;;;;;
-answers/zgM1MZFL1kSsiDdb07s2MT8BPpE3;3;4;3;3;4;Werbejingle;Medieninformatik;33
-answers/zvo4PXJSGzePPELdi8MZ9O73RuV2;2;1;2;1;5;Wahl eines leicht merkbaren Musters;Diplom-Informatikerin;39

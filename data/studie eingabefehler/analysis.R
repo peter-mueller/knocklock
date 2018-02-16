@@ -109,25 +109,3 @@ model <- lm(nonScaledDev ~ reference - 1)
 plot(reference, nonScaledDev)
 abline(model, col="red")
 sprintf("Model zum Std-Fehler/Zeit für Skalierung: |meas_last - ref_last| <= ref_last * %f",model$coefficients[1])
-
-###### 2. Studie
-
-Bestanden = 1114
-Zeitfehler = 189
-Anzahlfehler = 466
-Abweichungsfehler = 188
-
-
-datatable = matrix( 
-  c(Bestanden,0,0,0, 0,Zeitfehler,Anzahlfehler,Abweichungsfehler), 
-  ncol=2
-)
-barplot(datatable,
-        ylab="Anzahl",
-        names.arg = c("Erfolgreich", "Fehler"),
-main="Anzahl Erfolgreiche Authentifizierung\n und Fehlerarten"
-
-        )
-text(x=1.9,y=100,labels = "Zeitfehler")     
-text(x=1.9,y=500,labels = "Anzahlfehler")   
-text(x=1.9,y=750,labels = "Abweichungsfehler")   
